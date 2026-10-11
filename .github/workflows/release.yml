@@ -1,0 +1,42 @@
+name: Release by version
+
+# main に push されたとき、index.html の <meta name="version"> を読み、その名前(v1.2.3)のタグが無ければ
+# タグ + Release を作る。ページは GitHub Pages(main / root)がそのまま出す(kisekae・petit-body-simulator と同じ)。
+# 音(audio/*.mp3)と voices.json は運営の PC で tools/gen.py を回して作り、コミットする。
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Version from index.html
+        id: ver
+        run: |
+          V="$(sed -n 's/.*<meta name="version" content="\([^"]*\)".*/\1/p' index.html | head -1)"
+          test -n "$V"
+          J="$(sed -n 's/^const KOE_VERSION = "\([^"]*\)".*/\1/p' index.html | head -1)"
+          F="$(tr -d ' \n' < VERSION)"
+          if [ "$V" != "$J" ] || [ "$V" != "$F" ]; then echo "meta の版 ($V) と KOE_VERSION ($J) と VERSION ($F) が違います"; exit 1; fi
+          echo "version=$V" >> "$GITHUB_OUTPUT"
+          if git ls-remote --exit-code --tags origin "refs/tags/v$V" >/dev/null 2>&1; then echo "new_release=false" >> "$GITHUB_OUTPUT"; else echo "new_release=true" >> "$GITHUB_OUTPUT"; fi
+      - name: Tag + Release
+        if: steps.ver.outputs.new_release == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          V: ${{ steps.ver.outputs.version }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag "v$V"
+          git push origin "v$V"
+          gh release create "v$V" --title "ぷちの声をえらぶ v$V" --notes "https://teampuchi.github.io/koe/ の版 v$V。VOICEVOX の声の見本(voices.json・VOICES.md・audio/)。" voices.json VOICES.md
