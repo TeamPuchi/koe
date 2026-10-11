@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="version" content="1.3.2">
+<meta name="version" content="1.4.0">
 <title>ぷちの声をえらぶ — VOICEVOX の声の見本</title>
 <meta name="description" content="VOICEVOX の全スタイルで同じ一文を聞き比べる。雰囲気で絞って、ぷちの声を決める。">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -44,6 +44,16 @@ button.play.on{background:var(--pt-coral);border-color:var(--pt-coral);color:#ff
 .credits ul{columns:2;column-gap:24px;padding-left:1.2em;margin:6px 0} .credits li{break-inside:avoid}
 details{margin-top:8px;font-size:.85rem;color:var(--pt-ink-soft)} details pre{white-space:pre-wrap;font-family:inherit;background:var(--pt-panel);padding:8px 10px;border-radius:8px;margin:6px 0 0}
 footer{margin-top:24px;font-size:.82rem;color:var(--pt-off-ink)}
+.face-in{display:flex;gap:8px;flex-wrap:wrap;align-items:center;background:var(--pt-panel);border-radius:var(--pt-radius-card);padding:10px 12px;margin:0 0 14px}
+.face-in input{flex:1;min-width:220px;font:inherit;font-size:.95rem;padding:9px 12px;border:1px solid var(--pt-teal-edge);border-radius:var(--pt-radius-input);background:#fff;color:var(--pt-ink)}
+.face-in button{font:inherit;font-family:var(--pt-font-round);font-weight:700;font-size:.9rem;border:1.5px solid var(--pt-teal-edge);background:#fff;color:var(--pt-teal-ink);border-radius:var(--pt-radius-pill);padding:8px 14px;cursor:pointer;min-height:40px}
+.face-in .fn{font-size:.82rem;color:var(--pt-ink-soft);width:100%}
+.face-box{position:fixed;right:14px;bottom:calc(64px + env(safe-area-inset-bottom,0px));z-index:40;width:176px;background:#fff;border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,.18);padding:6px 6px 4px;opacity:0;transform:translateY(16px) scale(.7);transform-origin:bottom right;pointer-events:none;transition:opacity .35s ease,transform .45s cubic-bezier(.34,1.56,.64,1)}
+.face-box.show{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
+.face-box svg{display:block;width:100%;height:auto;border-radius:8px}
+.face-box .fname{font-family:var(--pt-font-round);font-weight:700;font-size:.82rem;text-align:center;color:var(--pt-ink-soft);margin:2px 0 0;min-height:1.1em}
+.face-box .fx{position:absolute;top:-8px;left:-8px;width:26px;height:26px;border-radius:50%;border:0;background:var(--pt-ink-soft);color:#fff;font-size:14px;cursor:pointer;line-height:26px;text-align:center;padding:0}
+@media (max-width:560px){.face-box{width:132px;right:10px}}
 .toast{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:50;background:var(--pt-teal);color:#fff;font-weight:700;font-size:15px;padding:12px 18px;border-radius:999px;box-shadow:0 6px 20px rgba(0,0,0,.18);opacity:0;transform:translateY(12px) scale(.96);pointer-events:none;transition:opacity .25s ease,transform .25s ease;max-width:calc(100vw - 32px)}
 .toast.show{opacity:1;transform:translateY(0) scale(1)} .toast.ng{background:var(--pt-coral-ink)}
 button.pick{font:inherit;font-family:var(--pt-font-round);font-weight:700;font-size:.95rem;border:1.5px solid var(--pt-coral);background:#fff;color:var(--pt-coral-ink);border-radius:var(--pt-radius-pill);padding:8px 16px;cursor:pointer;min-height:44px;margin-left:auto}
@@ -60,6 +70,8 @@ a{color:var(--pt-teal-ink)}
 <h1>ぷちの声をえらぶ</h1>
 <p class="lead">VOICEVOX の声の見本。同じ一文を聞き比べられます。名前ではなく「声」で選べるように、番号と雰囲気だけで並んでいます。ぷちの声は、里親さんとぷち自身であとから決めます。</p>
 <div class="sample" id="sample">「はじめまして。ぷちです。きょうも、いっしょに。」</div>
+<div class="face-in"><input type="text" id="faceIn" placeholder="きせかえでコピーした文（か URL）をここに貼ると、顔が出ます"><button type="button" id="faceBtn">顔を出す</button><span class="fn">声を鳴らすと、その顔がしゃべります。きせかえ: <a href="https://teampuchi.github.io/kisekae/" target="_blank" rel="noopener">teampuchi.github.io/kisekae</a></span></div>
+<div class="face-box" id="faceBox" aria-live="polite"><button class="fx" id="faceClose" type="button" aria-label="顔を閉じる">×</button><svg id="faceSvg" viewBox="0 0 320 240"></svg><div class="fname" id="faceName"></div></div>
 <div class="result" id="result"><b>決めた声</b>（LINE に貼ってください。コピー済みです）<textarea id="resultText" readonly></textarea><div class="r"><button class="play v" id="copyAgain" type="button">もう一度コピー</button><span id="copyNote"></span></div></div>
 <div class="tools">
   <div class="chips" id="chips"><label class="names"><input type="checkbox" id="showNames"> 名前も見せる（運営用）</label><span class="count" id="count"></span></div>
@@ -72,13 +84,49 @@ a{color:var(--pt-teal-ink)}
   <div id="policies"></div>
   <div>VOICEVOX: <a href="https://voicevox.hiroshiba.jp/" target="_blank" rel="noopener">https://voicevox.hiroshiba.jp/</a>（ENGINE <span id="engine"></span>）</div>
 </div>
-<footer>ぷちの声をえらぶ v<span id="ver">1.3.2</span> ・ TeamPuchi ・ 作った日 <span id="gen"></span></footer>
+<footer>ぷちの声をえらぶ v<span id="ver">1.4.0</span> ・ TeamPuchi ・ 作った日 <span id="gen"></span></footer>
 </div>
 <audio id="player" preload="none"></audio>
 <script>
 // 版。上げるときは <meta name="version"> と VERSION と両方を直す。main に入ると CI が同じ名前のタグと Release を作る
-const KOE_VERSION = "1.3.2";
+const KOE_VERSION = "1.4.0";
 const $ = s => document.querySelector(s);
+// ---- きせかえの顔(TeamPuchi/kisekae の render と同じ形) ----
+const NS = "http://www.w3.org/2000/svg";
+const EYES = [{key:"now",shape:"ellipse",rx:22,ry:32,dx:85,dy:-30,tilt:20},{key:"round",shape:"circle",rx:26,ry:26,dx:80,dy:-30,tilt:0},{key:"genki",shape:"ellipse",rx:22,ry:30,dx:85,dy:-28,tilt:-20},{key:"kiri",shape:"ellipse",rx:16,ry:34,dx:85,dy:-32,tilt:-30},{key:"sleepy",shape:"ellipse",rx:24,ry:12,dx:85,dy:-26,tilt:0},{key:"square",shape:"rect",rx:20,ry:26,dx:85,dy:-30,tilt:0}];
+const MOUTHS = [{key:"heart",shape:"heart",size:20,dy:45},{key:"smile",shape:"smile",size:70,dy:40},{key:"o",shape:"o",size:8,dy:46},{key:"line",shape:"line",size:40,dy:46}];
+const face = {on:false, color:"#2BA8DC", bg:"#ffffff", eye:"now", mouth:"heart", glasses:"none", name:"", blinkT0:-1, nextBlink:0};
+function el(tag, attrs){ const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); return e; }
+function eyeNode(e, side, h, c, ox, oy){ const x = 160 + side*e.dx + ox, y = 120 + e.dy + oy, tilt = side < 0 ? e.tilt : -e.tilt;
+  if (e.shape === "rect") return el("rect", {x:x-e.rx, y:y-h/2, width:e.rx*2, height:h, rx:Math.min(8,h/2), fill:c, transform:`rotate(${tilt} ${x} ${y})`});
+  return el("ellipse", {cx:x, cy:y, rx:e.rx, ry:h/2, fill:c, transform:`rotate(${tilt} ${x} ${y})`}); }
+function mouthNodes(m, c, ox, oy, open){ const x = 160 + ox, y = 120 + m.dy + oy, g = el("g", {});
+  if (m.shape === "heart") { const r = m.size + open*12/100; g.appendChild(el("circle", {cx:x-18, cy:y, r, fill:c})); g.appendChild(el("circle", {cx:x+18, cy:y, r, fill:c})); g.appendChild(el("polygon", {points:`${x-30},${y+10} ${x+30},${y+10} ${x},${y+45}`, fill:c})); return g; }
+  const oh = open*22/100;
+  if (m.shape === "smile") { const w = m.size; if (oh > 1) g.appendChild(el("path", {d:`M ${x-w/2} ${y} Q ${x} ${y+w*0.6} ${x+w/2} ${y} Q ${x} ${y+w*0.6-oh*1.6} ${x-w/2} ${y} Z`, fill:c})); g.appendChild(el("path", {d:`M ${x-w/2} ${y} Q ${x} ${y+w*0.6} ${x+w/2} ${y}`, stroke:c, "stroke-width":10, fill:"none", "stroke-linecap":"round"})); return g; }
+  if (m.shape === "o") { g.appendChild(el("circle", {cx:x, cy:y, r:m.size + oh*0.6, fill:c})); return g; }
+  if (oh > 1) g.appendChild(el("ellipse", {cx:x, cy:y, rx:m.size/2, ry:oh/2+2, fill:c})); g.appendChild(el("rect", {x:x-m.size/2, y:y-4, width:m.size, height:8, rx:4, fill:c})); return g; }
+function renderFace(t){ const svg = $("#faceSvg"); if (!svg) return; while (svg.firstChild) svg.removeChild(svg.firstChild);
+  const e = EYES.find(x => x.key === face.eye) || EYES[0], m = MOUTHS.find(x => x.key === face.mouth) || MOUTHS[0], c = face.color;
+  svg.appendChild(el("rect", {x:0, y:0, width:320, height:240, fill:face.bg}));
+  const ox = Math.sin(t*0.002)*5, oy = Math.cos(t*0.0014)*4;
+  svg.appendChild(el("ellipse", {cx:160+ox, cy:121+oy, rx:14, ry:6, fill:c}));
+  if (face.blinkT0 < 0 && t >= face.nextBlink) { face.blinkT0 = t; face.nextBlink = t + 2500 + Math.random()*2500; }
+  let h = e.ry*2; if (face.blinkT0 >= 0) { const p = (t - face.blinkT0)/250; if (p >= 1) face.blinkT0 = -1; else { const tri = p < .5 ? p*2 : (1-p)*2; h = Math.max(3, e.ry*2*(1-tri*0.9)); } }
+  svg.appendChild(eyeNode(e, -1, h, c, ox, oy)); svg.appendChild(eyeNode(e, +1, h, c, ox, oy));
+  if (face.glasses === "round") { const y = 120+e.dy+oy, r = e.rx+11, s_ = {fill:"none", stroke:c, "stroke-width":4, opacity:.85}; svg.appendChild(el("circle", {cx:160-e.dx+ox, cy:y, r, ...s_})); svg.appendChild(el("circle", {cx:160+e.dx+ox, cy:y, r, ...s_})); svg.appendChild(el("line", {x1:160-e.dx+r+ox, y1:y, x2:160+e.dx-r+ox, y2:y, ...s_})); }
+  if (face.glasses === "square") { const y = 120+e.dy+oy, w = Math.max(60, e.rx*2+22), hh = Math.max(30, Math.min(52, e.ry*2+6)), s_ = {fill:"none", stroke:c, "stroke-width":4, opacity:.85}; for (const side of [-1, 1]) { const x = 160+side*e.dx+ox; svg.appendChild(el("rect", {x:x-w/2, y:y-hh/2, width:w, height:hh, rx:6, ...s_})); } svg.appendChild(el("line", {x1:160-e.dx+w/2+ox, y1:y, x2:160+e.dx-w/2+ox, y2:y, ...s_})); }
+  // 声が鳴っている間は口がぱくぱく
+  const talking = player && !player.paused && !player.ended; const open = talking ? 45 + Math.abs(Math.sin(t*0.02))*55 : 0;
+  svg.appendChild(mouthNodes(m, c, ox, oy, open)); }
+function faceLoop(t){ if (face.on) renderFace(t); requestAnimationFrame(faceLoop); }
+function setFaceFromText(text){ // きせかえの文(LINE 用)か URL から # の中を読む
+  const m = /#([^\s]*)/.exec(text || ""); if (!m) return false; const q = new URLSearchParams(m[1]);
+  const c = q.get("c"); if (!c || !/^[0-9a-f]{6}$/i.test(c)) return false;
+  face.color = "#" + c.toLowerCase(); const b = q.get("b"); face.bg = (b && /^[0-9a-f]{6}$/i.test(b)) ? "#" + b.toLowerCase() : "#ffffff";
+  face.eye = EYES.some(x => x.key === q.get("e")) ? q.get("e") : "now"; face.mouth = MOUTHS.some(x => x.key === q.get("m")) ? q.get("m") : "heart";
+  face.glasses = ["round", "square"].includes(q.get("g")) ? q.get("g") : "none"; face.name = (q.get("n") || "").slice(0, 12);
+  face.on = true; $("#faceName").textContent = face.name; $("#faceBox").classList.add("show"); try { localStorage.setItem("koe.face", m[0]); } catch (e) {} return true; }
 const player = $("#player"); let current = null;
 function stopAll(){ if (current) { current.classList.remove("on"); current = null; } }
 player.addEventListener("ended", stopAll);
