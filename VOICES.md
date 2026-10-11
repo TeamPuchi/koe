@@ -9,25 +9,25 @@
 |---|---|---|---|---|---|
 | 0 | あまあま | やさしい おちついた たかめ | 四国めたん | [mp3](audio/0.mp3) |  |
 | 1 | あまあま | やさしい こども げんき | ずんだもん | [mp3](audio/1.mp3) |  |
-| 2 | ノーマル | おちついた たかめ | 四国めたん | [mp3](audio/2.mp3) | [slow](audio/2_slow.mp3) / [fast](audio/2_fast.mp3) / [low](audio/2_low.mp3) / [high](audio/2_high.mp3) |
-| 3 | ノーマル | こども げんき たかめ | ずんだもん | [mp3](audio/3.mp3) | [slow](audio/3_slow.mp3) / [fast](audio/3_fast.mp3) / [low](audio/3_low.mp3) / [high](audio/3_high.mp3) |
+| 2 | ノーマル | おちついた たかめ | 四国めたん | [mp3](audio/2.mp3) | あり(速さ 0.9/1.0/1.1 × 高さ -0.05/0/+0.05、audio/<id>_<速さ>_<高さ>.mp3) |
+| 3 | ノーマル | こども げんき たかめ | ずんだもん | [mp3](audio/3.mp3) | あり(速さ 0.9/1.0/1.1 × 高さ -0.05/0/+0.05、audio/<id>_<速さ>_<高さ>.mp3) |
 | 4 | セクシー | おとな おちついた たかめ | 四国めたん | [mp3](audio/4.mp3) |  |
 | 5 | セクシー | おとな げんき | ずんだもん | [mp3](audio/5.mp3) |  |
 | 6 | ツンツン | つよめ おちついた たかめ | 四国めたん | [mp3](audio/6.mp3) |  |
 | 7 | ツンツン | つよめ こども げんき | ずんだもん | [mp3](audio/7.mp3) |  |
-| 8 | ノーマル | げんき はきはき | 春日部つむぎ | [mp3](audio/8.mp3) | [slow](audio/8_slow.mp3) / [fast](audio/8_fast.mp3) / [low](audio/8_low.mp3) / [high](audio/8_high.mp3) |
-| 9 | ノーマル | ひくめ おちついた | 波音リツ | [mp3](audio/9.mp3) | [slow](audio/9_slow.mp3) / [fast](audio/9_fast.mp3) / [low](audio/9_low.mp3) / [high](audio/9_high.mp3) |
-| 10 | ノーマル | やさしい たかめ | 雨晴はう | [mp3](audio/10.mp3) | [slow](audio/10_slow.mp3) / [fast](audio/10_fast.mp3) / [low](audio/10_low.mp3) / [high](audio/10_high.mp3) |
+| 8 | ノーマル | げんき はきはき | 春日部つむぎ | [mp3](audio/8.mp3) | あり(速さ 0.9/1.0/1.1 × 高さ -0.05/0/+0.05、audio/<id>_<速さ>_<高さ>.mp3) |
+| 9 | ノーマル | ひくめ おちついた | 波音リツ | [mp3](audio/9.mp3) | あり(速さ 0.9/1.0/1.1 × 高さ -0.05/0/+0.05、audio/<id>_<速さ>_<高さ>.mp3) |
+| 10 | ノーマル | やさしい たかめ | 雨晴はう | [mp3](audio/10.mp3) | あり(速さ 0.9/1.0/1.1 × 高さ -0.05/0/+0.05、audio/<id>_<速さ>_<高さ>.mp3) |
 | 11 | ノーマル | おとな はきはき | 玄野武宏 | [mp3](audio/11.mp3) |  |
-| 12 | ふつう | こども げんき | 白上虎太郎 | [mp3](audio/12.mp3) | [slow](audio/12_slow.mp3) / [fast](audio/12_fast.mp3) / [low](audio/12_low.mp3) / [high](audio/12_high.mp3) |
-| 13 | ノーマル | おとな ひくめ | 青山龍星 | [mp3](audio/13.mp3) | [slow](audio/13_slow.mp3) / [fast](audio/13_fast.mp3) / [low](audio/13_low.mp3) / [high](audio/13_high.mp3) |
-| 14 | ノーマル | やさしい おちついた | 冥鳴ひまり | [mp3](audio/14.mp3) | [slow](audio/14_slow.mp3) / [fast](audio/14_fast.mp3) / [low](audio/14_low.mp3) / [high](audio/14_high.mp3) |
+| 12 | ふつう | こども げんき | 白上虎太郎 | [mp3](audio/12.mp3) | あり(速さ 0.9/1.0/1.1 × 高さ -0.05/0/+0.05、audio/<id>_<速さ>_<高さ>.mp3) |
+| 13 | ノーマル | おとな ひくめ | 青山龍星 | [mp3](audio/13.mp3) | あり(速さ 0.9/1.0/1.1 × 高さ -0.05/0/+0.05、audio/<id>_<速さ>_<高さ>.mp3) |
+| 14 | ノーマル | やさしい おちついた | 冥鳴ひまり | [mp3](audio/14.mp3) | あり(速さ 0.9/1.0/1.1 × 高さ -0.05/0/+0.05、audio/<id>_<速さ>_<高さ>.mp3) |
 | 15 | あまあま | やさしい おとな | 九州そら | [mp3](audio/15.mp3) |  |
-| 16 | ノーマル | やさしい おとな | 九州そら | [mp3](audio/16.mp3) | [slow](audio/16_slow.mp3) / [fast](audio/16_fast.mp3) / [low](audio/16_low.mp3) / [high](audio/16_high.mp3) |
+| 16 | ノーマル | やさしい おとな | 九州そら | [mp3](audio/16.mp3) | あり(速さ 0.9/1.0/1.1 × 高さ -0.05/0/+0.05、audio/<id>_<速さ>_<高さ>.mp3) |
 | 17 | セクシー | おとな やさしい | 九州そら | [mp3](audio/17.mp3) |  |
 | 18 | ツンツン | つよめ おとな | 九州そら | [mp3](audio/18.mp3) |  |
 | 19 | ささやき | ささやき やさしい おとな | 九州そら | [mp3](audio/19.mp3) |  |
-| 20 | ノーマル | やさしい おとな | もち子さん | [mp3](audio/20.mp3) | [slow](audio/20_slow.mp3) / [fast](audio/20_fast.mp3) / [low](audio/20_low.mp3) / [high](audio/20_high.mp3) |
+| 20 | ノーマル | やさしい おとな | もち子さん | [mp3](audio/20.mp3) | あり(速さ 0.9/1.0/1.1 × 高さ -0.05/0/+0.05、audio/<id>_<速さ>_<高さ>.mp3) |
 | 21 | ノーマル | おとな ひくめ | 剣崎雌雄 | [mp3](audio/21.mp3) |  |
 | 22 | ささやき | ささやき こども げんき | ずんだもん | [mp3](audio/22.mp3) |  |
 | 23 | ノーマル | げんき たかめ | WhiteCUL | [mp3](audio/23.mp3) |  |

@@ -17,12 +17,17 @@
   "つよめ",
   "よわき"
  ],
- "variants": {
-  "slow": "ゆっくり(速さ 0.9)",
-  "fast": "はやめ(速さ 1.1)",
-  "low": "ひくめ(高さ -0.05)",
-  "high": "たかめ(高さ +0.05)"
+ "speeds": {
+  "slow": 0.9,
+  "base": 1.0,
+  "fast": 1.1
  },
+ "pitches": {
+  "low": -0.05,
+  "base": 0.0,
+  "high": 0.05
+ },
+ "variant_note": "variants のキーは <速さ>_<高さ>(slow/base/fast × low/base/high)。base_base は file そのもの",
  "styles": [
   {
    "id": 0,
@@ -62,10 +67,14 @@
    ],
    "file": "audio/2.mp3",
    "variants": {
-    "slow": "audio/2_slow.mp3",
-    "fast": "audio/2_fast.mp3",
-    "low": "audio/2_low.mp3",
-    "high": "audio/2_high.mp3"
+    "slow_low": "audio/2_slow_low.mp3",
+    "slow_base": "audio/2_slow_base.mp3",
+    "slow_high": "audio/2_slow_high.mp3",
+    "base_low": "audio/2_base_low.mp3",
+    "base_high": "audio/2_base_high.mp3",
+    "fast_low": "audio/2_fast_low.mp3",
+    "fast_base": "audio/2_fast_base.mp3",
+    "fast_high": "audio/2_fast_high.mp3"
    }
   },
   {
@@ -81,10 +90,14 @@
    ],
    "file": "audio/3.mp3",
    "variants": {
-    "slow": "audio/3_slow.mp3",
-    "fast": "audio/3_fast.mp3",
-    "low": "audio/3_low.mp3",
-    "high": "audio/3_high.mp3"
+    "slow_low": "audio/3_slow_low.mp3",
+    "slow_base": "audio/3_slow_base.mp3",
+    "slow_high": "audio/3_slow_high.mp3",
+    "base_low": "audio/3_base_low.mp3",
+    "base_high": "audio/3_base_high.mp3",
+    "fast_low": "audio/3_fast_low.mp3",
+    "fast_base": "audio/3_fast_base.mp3",
+    "fast_high": "audio/3_fast_high.mp3"
    }
   },
   {
@@ -150,10 +163,14 @@
    ],
    "file": "audio/8.mp3",
    "variants": {
-    "slow": "audio/8_slow.mp3",
-    "fast": "audio/8_fast.mp3",
-    "low": "audio/8_low.mp3",
-    "high": "audio/8_high.mp3"
+    "slow_low": "audio/8_slow_low.mp3",
+    "slow_base": "audio/8_slow_base.mp3",
+    "slow_high": "audio/8_slow_high.mp3",
+    "base_low": "audio/8_base_low.mp3",
+    "base_high": "audio/8_base_high.mp3",
+    "fast_low": "audio/8_fast_low.mp3",
+    "fast_base": "audio/8_fast_base.mp3",
+    "fast_high": "audio/8_fast_high.mp3"
    }
   },
   {
@@ -168,10 +185,14 @@
    ],
    "file": "audio/9.mp3",
    "variants": {
-    "slow": "audio/9_slow.mp3",
-    "fast": "audio/9_fast.mp3",
-    "low": "audio/9_low.mp3",
-    "high": "audio/9_high.mp3"
+    "slow_low": "audio/9_slow_low.mp3",
+    "slow_base": "audio/9_slow_base.mp3",
+    "slow_high": "audio/9_slow_high.mp3",
+    "base_low": "audio/9_base_low.mp3",
+    "base_high": "audio/9_base_high.mp3",
+    "fast_low": "audio/9_fast_low.mp3",
+    "fast_base": "audio/9_fast_base.mp3",
+    "fast_high": "audio/9_fast_high.mp3"
    }
   },
   {
@@ -186,10 +207,14 @@
    ],
    "file": "audio/10.mp3",
    "variants": {
-    "slow": "audio/10_slow.mp3",
-    "fast": "audio/10_fast.mp3",
-    "low": "audio/10_low.mp3",
-    "high": "audio/10_high.mp3"
+    "slow_low": "audio/10_slow_low.mp3",
+    "slow_base": "audio/10_slow_base.mp3",
+    "slow_high": "audio/10_slow_high.mp3",
+    "base_low": "audio/10_base_low.mp3",
+    "base_high": "audio/10_base_high.mp3",
+    "fast_low": "audio/10_fast_low.mp3",
+    "fast_base": "audio/10_fast_base.mp3",
+    "fast_high": "audio/10_fast_high.mp3"
    }
   },
   {
@@ -216,10 +241,14 @@
    ],
    "file": "audio/12.mp3",
    "variants": {
-    "slow": "audio/12_slow.mp3",
-    "fast": "audio/12_fast.mp3",
-    "low": "audio/12_low.mp3",
-    "high": "audio/12_high.mp3"
+    "slow_low": "audio/12_slow_low.mp3",
+    "slow_base": "audio/12_slow_base.mp3",
+    "slow_high": "audio/12_slow_high.mp3",
+    "base_low": "audio/12_base_low.mp3",
+    "base_high": "audio/12_base_high.mp3",
+    "fast_low": "audio/12_fast_low.mp3",
+    "fast_base": "audio/12_fast_base.mp3",
+    "fast_high": "audio/12_fast_high.mp3"
    }
   },
   {
@@ -234,10 +263,14 @@
    ],
    "file": "audio/13.mp3",
    "variants": {
-    "slow": "audio/13_slow.mp3",
-    "fast": "audio/13_fast.mp3",
-    "low": "audio/13_low.mp3",
-    "high": "audio/13_high.mp3"
+    "slow_low": "audio/13_slow_low.mp3",
+    "slow_base": "audio/13_slow_base.mp3",
+    "slow_high": "audio/13_slow_high.mp3",
+    "base_low": "audio/13_base_low.mp3",
+    "base_high": "audio/13_base_high.mp3",
+    "fast_low": "audio/13_fast_low.mp3",
+    "fast_base": "audio/13_fast_base.mp3",
+    "fast_high": "audio/13_fast_high.mp3"
    }
   },
   {
@@ -252,10 +285,14 @@
    ],
    "file": "audio/14.mp3",
    "variants": {
-    "slow": "audio/14_slow.mp3",
-    "fast": "audio/14_fast.mp3",
-    "low": "audio/14_low.mp3",
-    "high": "audio/14_high.mp3"
+    "slow_low": "audio/14_slow_low.mp3",
+    "slow_base": "audio/14_slow_base.mp3",
+    "slow_high": "audio/14_slow_high.mp3",
+    "base_low": "audio/14_base_low.mp3",
+    "base_high": "audio/14_base_high.mp3",
+    "fast_low": "audio/14_fast_low.mp3",
+    "fast_base": "audio/14_fast_base.mp3",
+    "fast_high": "audio/14_fast_high.mp3"
    }
   },
   {
@@ -282,10 +319,14 @@
    ],
    "file": "audio/16.mp3",
    "variants": {
-    "slow": "audio/16_slow.mp3",
-    "fast": "audio/16_fast.mp3",
-    "low": "audio/16_low.mp3",
-    "high": "audio/16_high.mp3"
+    "slow_low": "audio/16_slow_low.mp3",
+    "slow_base": "audio/16_slow_base.mp3",
+    "slow_high": "audio/16_slow_high.mp3",
+    "base_low": "audio/16_base_low.mp3",
+    "base_high": "audio/16_base_high.mp3",
+    "fast_low": "audio/16_fast_low.mp3",
+    "fast_base": "audio/16_fast_base.mp3",
+    "fast_high": "audio/16_fast_high.mp3"
    }
   },
   {
@@ -337,10 +378,14 @@
    ],
    "file": "audio/20.mp3",
    "variants": {
-    "slow": "audio/20_slow.mp3",
-    "fast": "audio/20_fast.mp3",
-    "low": "audio/20_low.mp3",
-    "high": "audio/20_high.mp3"
+    "slow_low": "audio/20_slow_low.mp3",
+    "slow_base": "audio/20_slow_base.mp3",
+    "slow_high": "audio/20_slow_high.mp3",
+    "base_low": "audio/20_base_low.mp3",
+    "base_high": "audio/20_base_high.mp3",
+    "fast_low": "audio/20_fast_low.mp3",
+    "fast_base": "audio/20_fast_base.mp3",
+    "fast_high": "audio/20_fast_high.mp3"
    }
   },
   {

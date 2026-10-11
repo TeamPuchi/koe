@@ -13,7 +13,10 @@ ap.add_argument("--engine", default="http://localhost:50021")
 ap.add_argument("--text", default="はじめまして。ぷちです。きょうも、いっしょに。")
 ap.add_argument("--variants", default="2,3,8,10,9,14,16,20,12,13", help="速さ・高さの変化版も作る speaker id(カンマ区切り)")
 a = ap.parse_args()
-VARIANTS = {"slow": {"speedScale": 0.9}, "fast": {"speedScale": 1.1}, "low": {"pitchScale": -0.05}, "high": {"pitchScale": 0.05}}
+# 速さと高さは独立(10/11 ありさん)。3 × 3 の組み合わせで、ふつう×ふつうは元の音
+SPEEDS = {"slow": 0.9, "base": 1.0, "fast": 1.1}
+PITCHES = {"low": -0.05, "base": 0.0, "high": 0.05}
+VARIANTS = {f"{sk}_{pk}": {"speedScale": sv, "pitchScale": pv} for sk, sv in SPEEDS.items() for pk, pv in PITCHES.items() if not (sk == "base" and pk == "base")}
 variant_ids = {int(x) for x in a.variants.split(",") if x.strip()}
 # 前の voices.json のタグ(人が直した分)を引き継ぐ
 old_tags = {}
@@ -40,7 +43,8 @@ version = get("/version")
 speakers = get("/speakers")
 (ROOT / "audio").mkdir(exist_ok=True)
 out = {"generated": datetime.date.today().isoformat(), "engine_version": version, "text": a.text, "tags": ALL_TAGS,
-       "variants": {"slow": "ゆっくり(速さ 0.9)", "fast": "はやめ(速さ 1.1)", "low": "ひくめ(高さ -0.05)", "high": "たかめ(高さ +0.05)"},
+       "speeds": {"slow": 0.9, "base": 1.0, "fast": 1.1}, "pitches": {"low": -0.05, "base": 0.0, "high": 0.05},
+       "variant_note": "variants のキーは <速さ>_<高さ>(slow/base/fast × low/base/high)。base_base は file そのもの",
        "styles": [], "policies": {}}
 for sp in speakers:
     info = get("/speaker_info", speaker_uuid=sp["speaker_uuid"])
@@ -67,7 +71,7 @@ lines = [f"# VOICEVOX の声の一覧(ぷちたち用)\n", f"作った日 {out['
          "雰囲気のタグは初期値(スタイル名と話者の説明から機械的に付けた)。直したいときは voices.json の `tags` を直す(tools/gen.py は人が直したタグを引き継ぐ)。\n",
          "| speaker id | スタイル | 雰囲気 | 話者 | 音 | 速さ・高さの変化版 |", "|---|---|---|---|---|---|"]
 for st in out["styles"]:
-    v = " / ".join(f"[{k}](audio/{st['id']}_{k}.mp3)" for k in st.get("variants", {})) if st.get("variants") else ""
+    v = "あり(速さ 0.9/1.0/1.1 × 高さ -0.05/0/+0.05、audio/<id>_<速さ>_<高さ>.mp3)" if st.get("variants") else ""
     lines.append(f"| {st['id']} | {st['style']} | {' '.join(st['tags'])} | {st['speaker']} | [mp3](audio/{st['id']}.mp3) | {v} |")
 lines += ["", "## クレジット(必須)", "", "作った声を使うときは、話者ごとに「VOICEVOX:<話者名>」と書く。各話者の利用規約は voices.json の policies と、ページの「利用規約」に。"]
 (ROOT / "VOICES.md").write_text("\n".join(lines) + "\n", encoding="utf-8")

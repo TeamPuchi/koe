@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="version" content="1.1.0">
+<meta name="version" content="1.2.0">
 <title>ぷちの声をえらぶ — VOICEVOX の声の見本</title>
 <meta name="description" content="VOICEVOX の全スタイルで同じ一文を聞き比べる。雰囲気で絞って、ぷちの声を決める。">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -62,19 +62,19 @@ a{color:var(--pt-teal-ink)}
   <div class="chips" id="chips"><span class="count" id="count"></span></div>
 </div>
 <div id="list"></div>
-<p class="note">左の大きな数字が <b>speaker id</b> です。ぷちの声に決めたら、この番号を運営に伝えてください（クラウドの <code>voice_speaker</code> に入れる値）。雰囲気のタグは初期値で、直せます（<a href="voices.json">voices.json</a> の tags）。ぷちたちが読む一覧は <a href="VOICES.md">VOICES.md</a>。「速さ・高さ」は、おすすめの 10 個だけ選べます（ふつう／ゆっくり／はやめ／ひくめ／たかめ。選んだものが「きく」と「これにする」に使われます）。</p>
+<p class="note">左の大きな数字が <b>speaker id</b> です。ぷちの声に決めたら、この番号を運営に伝えてください（クラウドの <code>voice_speaker</code> に入れる値）。雰囲気のタグは初期値で、直せます（<a href="voices.json">voices.json</a> の tags）。ぷちたちが読む一覧は <a href="VOICES.md">VOICES.md</a>。速さ（ゆっくり／ふつう／はやめ）と高さ（ひくめ／ふつう／たかめ）は別々に選べます（おすすめの 10 個だけ）。選んだ組み合わせが「きく」と「これにする」に使われます。</p>
 <div class="credits">
   <b>クレジット</b>（必須）: この見本の音は VOICEVOX で作りました。話者ごとに「VOICEVOX:話者名」と表記します。各話者の利用規約は下の「利用規約」を開いてください。
   <ul id="credits"></ul>
   <div id="policies"></div>
   <div>VOICEVOX: <a href="https://voicevox.hiroshiba.jp/" target="_blank" rel="noopener">https://voicevox.hiroshiba.jp/</a>（ENGINE <span id="engine"></span>）</div>
 </div>
-<footer>ぷちの声をえらぶ v<span id="ver">1.1.0</span> ・ TeamPuchi ・ 作った日 <span id="gen"></span></footer>
+<footer>ぷちの声をえらぶ v<span id="ver">1.2.0</span> ・ TeamPuchi ・ 作った日 <span id="gen"></span></footer>
 </div>
 <audio id="player" preload="none"></audio>
 <script>
 // 版。上げるときは <meta name="version"> と VERSION と両方を直す。main に入ると CI が同じ名前のタグと Release を作る
-const KOE_VERSION = "1.1.0";
+const KOE_VERSION = "1.2.0";
 const $ = s => document.querySelector(s);
 const player = $("#player"); let current = null;
 function stopAll(){ if (current) { current.classList.remove("on"); current = null; } }
@@ -82,9 +82,10 @@ player.addEventListener("ended", stopAll);
 function playBtn(label, file, cls){ const b = document.createElement("button"); b.className = "play" + (cls ? " " + cls : ""); b.type = "button"; b.textContent = label;
   b.onclick = () => { if (current === b && !player.paused) { player.pause(); stopAll(); return; } stopAll(); player.src = file; player.play().catch(()=>{}); b.classList.add("on"); current = b; }; return b; }
 const selected = new Set();
-const VPARAM = {slow:{speed:0.9,pitch:0,into:1.0}, fast:{speed:1.1,pitch:0,into:1.0}, low:{speed:1.0,pitch:-0.05,into:1.0}, high:{speed:1.0,pitch:0.05,into:1.0}, base:{speed:1.0,pitch:0,into:1.0}};
-function pickText(st, vkey){ const v = VPARAM[vkey] || VPARAM.base;
-  return `ぷちの声、決めました🎤\nspeaker id: ${st.id}\nスタイル: ${st.style}\n雰囲気: ${st.tags.join("・") || "-"}\n速さ: ${v.speed} / 高さ: ${v.pitch} / 抑揚: ${v.into}\nきかせて: https://teampuchi.github.io/koe/#id=${st.id}`; }
+const SPEEDS = {slow:0.9, base:1.0, fast:1.1}, PITCHES = {low:-0.05, base:0, high:0.05};
+function fileFor(st, sk, pk){ if (sk === "base" && pk === "base") return st.file; return (st.variants && st.variants[sk + "_" + pk]) || st.file; }
+function pickText(st, sk, pk){
+  return `ぷちの声、決めました🎤\nspeaker id: ${st.id}\nスタイル: ${st.style}\n雰囲気: ${st.tags.join("・") || "-"}\n速さ: ${SPEEDS[sk] ?? 1.0} / 高さ: ${PITCHES[pk] ?? 0} / 抑揚: 1.0\nきかせて: https://teampuchi.github.io/koe/#id=${st.id}`; }
 async function copyText(t){ try { await navigator.clipboard.writeText(t); return true; } catch (e) { const ta = $("#resultText"); ta.focus(); ta.select(); try { return document.execCommand("copy"); } catch (e2) { return false; } } }
 fetch("voices.json?v=" + KOE_VERSION, {cache: "no-cache"}).then(r => r.json()).then(d => {
   $("#sample").textContent = "「" + d.text + "」"; $("#engine").textContent = d.engine_version; $("#gen").textContent = d.generated;
@@ -99,22 +100,23 @@ fetch("voices.json?v=" + KOE_VERSION, {cache: "no-cache"}).then(r => r.json()).t
     st.tags.forEach(t => { const s = document.createElement("span"); s.className = "tag"; s.textContent = t; main.appendChild(s); });
     const sp = document.createElement("span"); sp.className = "spk"; sp.textContent = st.speaker; main.appendChild(sp);
     it.appendChild(main);
-    it.id = "id-" + st.id; it.dataset.vkey = "base";
+    it.id = "id-" + st.id; it.dataset.sk = "base"; it.dataset.pk = "base";
     const btns = document.createElement("div"); btns.className = "btns";
     // 「きく」は、いま選んでいる速さ・高さで鳴る
     const base = playBtn("▶ きく", st.file); btns.appendChild(base);
-    base.onclick = () => { const k = it.dataset.vkey; const f = (k !== "base" && st.variants && st.variants[k]) || st.file; if (current === base && !player.paused) { player.pause(); stopAll(); return; } stopAll(); player.src = f; player.play().catch(()=>{}); base.classList.add("on"); current = base; };
+    const playSel = () => { stopAll(); player.src = fileFor(st, it.dataset.sk, it.dataset.pk); player.play().catch(()=>{}); base.classList.add("on"); current = base; };
+    base.onclick = () => { if (current === base && !player.paused) { player.pause(); stopAll(); return; } playSel(); };
     if (st.variants) {
-      // 速さ・高さは「選ぶ」もの(1 つだけ選ばれる)。押すと選んで、その声で鳴る
-      const grp = document.createElement("div"); grp.className = "vgrp"; const lab = document.createElement("span"); lab.className = "vlab"; lab.textContent = "速さ・高さ:"; grp.appendChild(lab);
-      const opts = [["base", "ふつう"], ["slow", "ゆっくり"], ["fast", "はやめ"], ["low", "ひくめ"], ["high", "たかめ"]];
-      opts.forEach(([k, label]) => { const b = document.createElement("button"); b.type = "button"; b.className = "vopt" + (k === "base" ? " sel" : ""); b.textContent = label;
-        b.onclick = () => { grp.querySelectorAll(".vopt").forEach(x => x.classList.remove("sel")); b.classList.add("sel"); it.dataset.vkey = k; const f = k === "base" ? st.file : st.variants[k]; stopAll(); player.src = f; player.play().catch(()=>{}); base.classList.add("on"); current = base; };
-        grp.appendChild(b); });
-      btns.appendChild(grp);
+      // 速さと高さは独立。それぞれ 1 つ選ぶ(押すと選んで、その組み合わせで鳴る)
+      const mk = (label, key, opts) => { const grp = document.createElement("div"); grp.className = "vgrp"; const lab = document.createElement("span"); lab.className = "vlab"; lab.textContent = label; grp.appendChild(lab);
+        opts.forEach(([k, text]) => { const b = document.createElement("button"); b.type = "button"; b.className = "vopt" + (k === "base" ? " sel" : ""); b.textContent = text;
+          b.onclick = () => { grp.querySelectorAll(".vopt").forEach(x => x.classList.remove("sel")); b.classList.add("sel"); it.dataset[key] = k; playSel(); }; grp.appendChild(b); });
+        return grp; };
+      btns.appendChild(mk("速さ:", "sk", [["slow", "ゆっくり"], ["base", "ふつう"], ["fast", "はやめ"]]));
+      btns.appendChild(mk("高さ:", "pk", [["low", "ひくめ"], ["base", "ふつう"], ["high", "たかめ"]]));
     }
     const pick = document.createElement("button"); pick.className = "pick"; pick.type = "button"; pick.textContent = "これにする";
-    pick.onclick = async () => { const t = pickText(st, it.dataset.vkey); const box = $("#result"); $("#resultText").value = t; box.classList.add("show"); const ok = await copyText(t);
+    pick.onclick = async () => { const t = pickText(st, it.dataset.sk, it.dataset.pk); const box = $("#result"); $("#resultText").value = t; box.classList.add("show"); const ok = await copyText(t);
       $("#copyNote").textContent = ok ? "コピーしました。LINE に貼ってください" : "コピーできなかったので、上の文を長押しでコピーしてください";
       document.querySelectorAll(".item.picked").forEach(x => x.classList.remove("picked")); it.classList.add("picked"); history.replaceState(null, "", "#id=" + st.id); box.scrollIntoView({behavior:"smooth", block:"start"}); };
     btns.appendChild(pick);
