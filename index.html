@@ -186,6 +186,13 @@ fetch("voices.json?v=" + KOE_VERSION, {cache: "no-cache"}).then(r => r.json()).t
   }
   filter();
   $("#showNames").addEventListener("change", e => document.body.classList.toggle("names", e.target.checked));
+  // 顔: 貼る欄 / 前に貼ったもの / URL の # に c= があればそれ
+  $("#faceBtn").onclick = () => { if (!setFaceFromText($("#faceIn").value)) { toast("きせかえの文か URL(# のあとに c=… が入っているもの)を貼ってください", true); } };
+  $("#faceIn").addEventListener("paste", () => setTimeout(() => setFaceFromText($("#faceIn").value), 0));
+  $("#faceClose").onclick = () => { face.on = false; $("#faceBox").classList.remove("show"); try { localStorage.removeItem("koe.face"); } catch (e) {} };
+  try { const saved = localStorage.getItem("koe.face"); if (saved) setFaceFromText(saved); } catch (e) {}
+  if (/[#&]c=/.test(location.hash)) setFaceFromText(location.hash);
+  requestAnimationFrame(faceLoop);
   $("#copyAgain").onclick = async () => { const ok = await copyText($("#resultText").value); $("#copyNote").textContent = ok ? "コピーしました" : "コピーできませんでした"; toast(ok ? "✓ コピーしました" : "コピーできませんでした", !ok); };
   // #id=29 で開いたら、その声までスクロールして印を付ける
   const m = /id=(\d+)/.exec(location.hash || ""); if (m) { const it = document.getElementById("id-" + m[1]); if (it) { it.classList.add("picked"); setTimeout(() => it.scrollIntoView({behavior:"smooth", block:"center"}), 150); } }
