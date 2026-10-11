@@ -83,7 +83,7 @@ const VPARAM = {slow:{speed:0.9,pitch:0,into:1.0}, fast:{speed:1.1,pitch:0,into:
 function pickText(st, vkey){ const v = VPARAM[vkey] || VPARAM.base;
   return `ぷちの声、決めました🎤\nspeaker id: ${st.id}\nスタイル: ${st.style}\n雰囲気: ${st.tags.join("・") || "-"}\n速さ: ${v.speed} / 高さ: ${v.pitch} / 抑揚: ${v.into}\nきかせて: https://teampuchi.github.io/koe/#id=${st.id}`; }
 async function copyText(t){ try { await navigator.clipboard.writeText(t); return true; } catch (e) { const ta = $("#resultText"); ta.focus(); ta.select(); try { return document.execCommand("copy"); } catch (e2) { return false; } } }
-fetch("voices.json").then(r => r.json()).then(d => {
+fetch("voices.json?v=" + KOE_VERSION, {cache: "no-cache"}).then(r => r.json()).then(d => {
   $("#sample").textContent = "「" + d.text + "」"; $("#engine").textContent = d.engine_version; $("#gen").textContent = d.generated;
   const chips = $("#chips"), count = $("#count");
   d.tags.forEach(t => { const c = document.createElement("button"); c.className = "chip"; c.type = "button"; c.textContent = t; c.onclick = () => { c.classList.toggle("on"); if (selected.has(t)) selected.delete(t); else selected.add(t); filter(); }; chips.insertBefore(c, count); });
