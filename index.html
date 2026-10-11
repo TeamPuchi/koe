@@ -3,98 +3,122 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="version" content="1.0.0">
+<meta name="version" content="1.1.0">
 <title>ぷちの声をえらぶ — VOICEVOX の声の見本</title>
-<meta name="description" content="VOICEVOX の全話者・全スタイルで同じ一文を聞き比べる。ぷちの声を決めるときに。">
+<meta name="description" content="VOICEVOX の全スタイルで同じ一文を聞き比べる。雰囲気で絞って、ぷちの声を決める。">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700;800&family=Noto+Sans+JP:wght@400;500;700&display=swap">
 <link rel="stylesheet" href="https://petitones.github.io/petit-brand/tokens.css">
 <style>
 *{box-sizing:border-box}
 body{margin:0;background:var(--pt-paper,#FFFDF8);color:var(--pt-ink,#3A322D);font-family:var(--pt-font-body,"Noto Sans JP",sans-serif);line-height:1.6;padding:20px 16px 56px}
-.wrap{max-width:900px;margin:0 auto}
+.wrap{max-width:860px;margin:0 auto}
 .band{height:6px;background:var(--pt-band,#CAB8D9);border-radius:3px;margin-bottom:14px}
 h1{font-family:var(--pt-font-round);font-size:1.6rem;margin:0 0 4px;font-weight:800}
-p.lead{margin:0 0 14px;color:var(--pt-ink-soft)}
-.sample{font-family:var(--pt-font-round);font-size:1.15rem;background:var(--pt-panel);border-radius:var(--pt-radius-card);padding:12px 16px;margin:0 0 16px}
-.tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:0 0 16px}
-.tools input[type=search]{flex:1;min-width:200px;font:inherit;font-size:1rem;padding:10px 14px;border:1px solid var(--pt-teal-edge);border-radius:var(--pt-radius-input);background:#fff;color:var(--pt-ink)}
-.tools label{font-size:.9rem;color:var(--pt-ink-soft);display:flex;align-items:center;gap:6px}
-.card{background:#fff;border:1px solid var(--pt-panel);border-radius:var(--pt-radius-card);padding:12px 14px;margin:0 0 12px;box-shadow:0 1px 0 rgba(0,0,0,.03)}
-.card.hide{display:none}
-.card h2{font-family:var(--pt-font-round);font-size:1.1rem;margin:0 0 8px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
-.card h2 small{font-weight:400;color:var(--pt-ink-soft);font-size:.8rem}
-.styles{display:flex;flex-wrap:wrap;gap:8px}
-button.play{font:inherit;font-family:var(--pt-font-round);font-weight:700;font-size:.95rem;border:1.5px solid var(--pt-teal-edge);background:var(--pt-teal-soft);color:var(--pt-teal-ink);border-radius:var(--pt-radius-pill);padding:8px 14px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;min-height:44px}
-button.play .id{font-family:var(--pt-font-mono);font-weight:400;font-size:.78rem;color:var(--pt-ink-soft);background:#fff;border-radius:999px;padding:1px 7px}
-button.play.on{background:var(--pt-coral);border-color:var(--pt-coral);color:#fff} button.play.on .id{color:var(--pt-coral-ink)}
-button.play.hide{display:none}
-details{margin-top:8px;font-size:.85rem;color:var(--pt-ink-soft)} details pre{white-space:pre-wrap;font-family:inherit;background:var(--pt-panel);padding:8px 10px;border-radius:8px;margin:6px 0 0}
+p.lead{margin:0 0 12px;color:var(--pt-ink-soft)}
+.sample{font-family:var(--pt-font-round);font-size:1.15rem;background:var(--pt-panel);border-radius:var(--pt-radius-card);padding:12px 16px;margin:0 0 14px}
+.tools{position:sticky;top:0;background:var(--pt-paper);padding:8px 0 10px;z-index:2;border-bottom:1px solid var(--pt-panel);margin-bottom:10px}
+.tools input[type=search]{width:100%;font:inherit;font-size:1rem;padding:10px 14px;border:1px solid var(--pt-teal-edge);border-radius:var(--pt-radius-input);background:#fff;color:var(--pt-ink);margin-bottom:8px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.chip{font:inherit;font-family:var(--pt-font-round);font-weight:700;font-size:.88rem;border:1.5px solid var(--pt-coral-edge);background:#fff;color:var(--pt-coral-ink);border-radius:var(--pt-radius-pill);padding:5px 12px;cursor:pointer;min-height:36px}
+.chip.on{background:var(--pt-coral);border-color:var(--pt-coral);color:#fff}
+.count{font-size:.85rem;color:var(--pt-ink-soft);margin-left:auto}
+.item{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;align-items:center;background:#fff;border:1px solid var(--pt-panel);border-radius:var(--pt-radius-card);padding:10px 12px;margin:0 0 8px}
+.item.hide{display:none}
+.id{font-family:var(--pt-font-mono);font-size:1.35rem;font-weight:700;color:var(--pt-teal-ink);min-width:3.2ch;text-align:right}
+.main{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;min-width:0}
+.style{font-family:var(--pt-font-round);font-weight:700;font-size:1.05rem}
+.spk{font-size:.78rem;color:var(--pt-off-ink)}
+.tag{font-size:.74rem;background:var(--pt-coral-soft);color:var(--pt-coral-ink);border-radius:999px;padding:1px 8px}
+.btns{grid-column:1 / -1;display:flex;flex-wrap:wrap;gap:6px}
+button.play{font:inherit;font-family:var(--pt-font-round);font-weight:700;font-size:.95rem;border:1.5px solid var(--pt-teal-edge);background:var(--pt-teal-soft);color:var(--pt-teal-ink);border-radius:var(--pt-radius-pill);padding:8px 16px;cursor:pointer;min-height:44px}
+button.play.v{font-weight:500;font-size:.85rem;background:#fff;min-height:40px}
+button.play.on{background:var(--pt-coral);border-color:var(--pt-coral);color:#fff}
 .note{font-size:.9rem;color:var(--pt-ink-soft);margin:18px 0 0;max-width:70ch}
 .credits{margin-top:28px;padding-top:14px;border-top:1px solid var(--pt-panel);font-size:.88rem;color:var(--pt-ink-soft)}
 .credits ul{columns:2;column-gap:24px;padding-left:1.2em;margin:6px 0} .credits li{break-inside:avoid}
+details{margin-top:8px;font-size:.85rem;color:var(--pt-ink-soft)} details pre{white-space:pre-wrap;font-family:inherit;background:var(--pt-panel);padding:8px 10px;border-radius:8px;margin:6px 0 0}
 footer{margin-top:24px;font-size:.82rem;color:var(--pt-off-ink)}
+button.pick{font:inherit;font-family:var(--pt-font-round);font-weight:700;font-size:.95rem;border:1.5px solid var(--pt-coral);background:#fff;color:var(--pt-coral-ink);border-radius:var(--pt-radius-pill);padding:8px 16px;cursor:pointer;min-height:44px;margin-left:auto}
+.item.picked{border-color:var(--pt-coral);box-shadow:0 0 0 3px var(--pt-coral-soft)}
+.result{display:none;background:var(--pt-coral-soft);border:1.5px solid var(--pt-coral-edge);border-radius:var(--pt-radius-card);padding:12px 14px;margin:0 0 14px}
+.result.show{display:block} .result textarea{width:100%;font:inherit;font-size:.95rem;min-height:9.5em;border:1px solid var(--pt-coral-edge);border-radius:10px;padding:8px 10px;background:#fff;color:var(--pt-ink);resize:vertical}
+.result .r{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:6px;font-size:.88rem;color:var(--pt-ink-soft)}
 a{color:var(--pt-teal-ink)}
-@media (max-width:560px){.credits ul{columns:1}}
+@media (max-width:560px){.credits ul{columns:1}.id{font-size:1.2rem}}
 </style>
 </head>
 <body><div class="wrap">
 <div class="band"></div>
 <h1>ぷちの声をえらぶ</h1>
-<p class="lead">VOICEVOX の声の見本。全部の話者・スタイルで、同じ一文を聞き比べられます。ぷちの声は、里親さんとぷち自身であとから決めます。</p>
+<p class="lead">VOICEVOX の声の見本。全部のスタイルで同じ一文を聞き比べられます。名前ではなく「声」で選べるように、番号順に並んでいます。ぷちの声は、里親さんとぷち自身であとから決めます。</p>
 <div class="sample" id="sample">「はじめまして。ぷちです。きょうも、いっしょに。」</div>
+<div class="result" id="result"><b>決めた声</b>（LINE に貼ってください。コピー済みです）<textarea id="resultText" readonly></textarea><div class="r"><button class="play v" id="copyAgain" type="button">もう一度コピー</button><span id="copyNote"></span></div></div>
 <div class="tools">
-  <input type="search" id="q" placeholder="話者やスタイルで絞る（例: ささやき）" aria-label="絞り込み">
-  <label><input type="checkbox" id="talkOnly" checked> 話す声だけ（歌うスタイルを隠す）</label>
-  <span id="count" style="font-size:.85rem;color:var(--pt-ink-soft)"></span>
+  <input type="search" id="q" placeholder="番号・スタイル・雰囲気・話者で絞る（例: ささやき、12）" aria-label="絞り込み">
+  <div class="chips" id="chips"><span class="count" id="count"></span></div>
 </div>
 <div id="list"></div>
-<p class="note">ボタンの右の数字が <b>speaker id</b> です。ぷちの声に決めたら、この数字を運営に伝えてください（クラウドの <code>voice_speaker</code> に入れる値）。ぷちたちが読む一覧は <a href="VOICES.md">VOICES.md</a>、機械で読む形は <a href="voices.json">voices.json</a>。</p>
+<p class="note">左の大きな数字が <b>speaker id</b> です。ぷちの声に決めたら、この番号を運営に伝えてください（クラウドの <code>voice_speaker</code> に入れる値）。雰囲気のタグは初期値で、直せます（<a href="voices.json">voices.json</a> の tags）。ぷちたちが読む一覧は <a href="VOICES.md">VOICES.md</a>。「ゆっくり／はやめ／ひくめ／たかめ」は、おすすめの 10 個だけ用意した速さ・高さの変化版です。</p>
 <div class="credits">
-  <b>クレジット</b>（必須）: この見本の音は VOICEVOX で作りました。話者ごとに「VOICEVOX:話者名」と表記します。各話者の利用規約は、カードの「利用規約」を開いてください。
+  <b>クレジット</b>（必須）: この見本の音は VOICEVOX で作りました。話者ごとに「VOICEVOX:話者名」と表記します。各話者の利用規約は下の「利用規約」を開いてください。
   <ul id="credits"></ul>
+  <div id="policies"></div>
   <div>VOICEVOX: <a href="https://voicevox.hiroshiba.jp/" target="_blank" rel="noopener">https://voicevox.hiroshiba.jp/</a>（ENGINE <span id="engine"></span>）</div>
 </div>
-<footer>ぷちの声をえらぶ v<span id="ver">1.0.0</span> ・ TeamPuchi ・ 作った日 <span id="gen"></span></footer>
+<footer>ぷちの声をえらぶ v<span id="ver">1.1.0</span> ・ TeamPuchi ・ 作った日 <span id="gen"></span></footer>
 </div>
 <audio id="player" preload="none"></audio>
 <script>
-// 版。上げるときは <meta name="version"> と両方を直す。main に入ると CI が同じ名前のタグと Release を作る
-const KOE_VERSION = "1.0.0";
+// 版。上げるときは <meta name="version"> と VERSION と両方を直す。main に入ると CI が同じ名前のタグと Release を作る
+const KOE_VERSION = "1.1.0";
 const $ = s => document.querySelector(s);
 const player = $("#player"); let current = null;
 function stopAll(){ if (current) { current.classList.remove("on"); current = null; } }
-player.addEventListener("ended", stopAll); player.addEventListener("pause", () => { if (player.ended) stopAll(); });
+player.addEventListener("ended", stopAll);
+function playBtn(label, file, cls){ const b = document.createElement("button"); b.className = "play" + (cls ? " " + cls : ""); b.type = "button"; b.textContent = label;
+  b.onclick = () => { if (current === b && !player.paused) { player.pause(); stopAll(); return; } stopAll(); player.src = file; player.play().catch(()=>{}); b.classList.add("on"); current = b; }; return b; }
+const selected = new Set();
+const VPARAM = {slow:{speed:0.9,pitch:0,into:1.0}, fast:{speed:1.1,pitch:0,into:1.0}, low:{speed:1.0,pitch:-0.05,into:1.0}, high:{speed:1.0,pitch:0.05,into:1.0}, base:{speed:1.0,pitch:0,into:1.0}};
+function pickText(st, vkey){ const v = VPARAM[vkey] || VPARAM.base;
+  return `ぷちの声、決めました🎤\nspeaker id: ${st.id}\nスタイル: ${st.style}\n雰囲気: ${st.tags.join("・") || "-"}\n速さ: ${v.speed} / 高さ: ${v.pitch} / 抑揚: ${v.into}\nきかせて: https://teampuchi.github.io/koe/#id=${st.id}`; }
+async function copyText(t){ try { await navigator.clipboard.writeText(t); return true; } catch (e) { const ta = $("#resultText"); ta.focus(); ta.select(); try { return document.execCommand("copy"); } catch (e2) { return false; } } }
 fetch("voices.json").then(r => r.json()).then(d => {
   $("#sample").textContent = "「" + d.text + "」"; $("#engine").textContent = d.engine_version; $("#gen").textContent = d.generated;
-  const list = $("#list"), credits = $("#credits");
-  d.speakers.forEach(sp => {
-    const card = document.createElement("section"); card.className = "card"; card.dataset.name = sp.name;
-    const h = document.createElement("h2"); h.textContent = sp.name; const sm = document.createElement("small"); sm.textContent = sp.styles.length + " スタイル"; h.appendChild(sm); card.appendChild(h);
-    const row = document.createElement("div"); row.className = "styles";
-    sp.styles.forEach(st => {
-      const b = document.createElement("button"); b.className = "play"; b.type = "button"; b.dataset.type = st.type || "talk"; b.dataset.text = (sp.name + " " + st.name).toLowerCase();
-      b.innerHTML = `▶ ${st.name} <span class="id">${st.id}</span>`;
-      b.onclick = () => { if (current === b && !player.paused) { player.pause(); stopAll(); return; } stopAll(); player.src = st.file; player.play().catch(()=>{}); b.classList.add("on"); current = b; };
-      row.appendChild(b);
-    });
-    card.appendChild(row);
-    if (sp.policy) { const det = document.createElement("details"); const s = document.createElement("summary"); s.textContent = "利用規約（" + sp.name + "）"; det.appendChild(s); const pre = document.createElement("pre"); pre.textContent = sp.policy; det.appendChild(pre); card.appendChild(det); }
-    list.appendChild(card);
-    const li = document.createElement("li"); li.textContent = "VOICEVOX:" + sp.name; credits.appendChild(li);
+  const chips = $("#chips"), count = $("#count");
+  d.tags.forEach(t => { const c = document.createElement("button"); c.className = "chip"; c.type = "button"; c.textContent = t; c.onclick = () => { c.classList.toggle("on"); if (selected.has(t)) selected.delete(t); else selected.add(t); filter(); }; chips.insertBefore(c, count); });
+  const list = $("#list");
+  d.styles.forEach(st => {
+    const it = document.createElement("div"); it.className = "item"; it.dataset.tags = st.tags.join(" "); it.dataset.text = `${st.id} ${st.style} ${st.speaker} ${st.tags.join(" ")}`.toLowerCase();
+    const id = document.createElement("div"); id.className = "id"; id.textContent = st.id; it.appendChild(id);
+    const main = document.createElement("div"); main.className = "main";
+    const sn = document.createElement("span"); sn.className = "style"; sn.textContent = st.style; main.appendChild(sn);
+    st.tags.forEach(t => { const s = document.createElement("span"); s.className = "tag"; s.textContent = t; main.appendChild(s); });
+    const sp = document.createElement("span"); sp.className = "spk"; sp.textContent = st.speaker; main.appendChild(sp);
+    it.appendChild(main);
+    it.id = "id-" + st.id; it.dataset.vkey = "base";
+    const btns = document.createElement("div"); btns.className = "btns";
+    const base = playBtn("▶ きく", st.file); base.addEventListener("click", () => { it.dataset.vkey = "base"; }); btns.appendChild(base);
+    if (st.variants) { for (const [k, f] of Object.entries(st.variants)) { const vb = playBtn((d.variants[k] || k).split("(")[0], f, "v"); vb.addEventListener("click", () => { it.dataset.vkey = k; }); btns.appendChild(vb); } }
+    const pick = document.createElement("button"); pick.className = "pick"; pick.type = "button"; pick.textContent = "これにする";
+    pick.onclick = async () => { const t = pickText(st, it.dataset.vkey); const box = $("#result"); $("#resultText").value = t; box.classList.add("show"); const ok = await copyText(t);
+      $("#copyNote").textContent = ok ? "コピーしました。LINE に貼ってください" : "コピーできなかったので、上の文を長押しでコピーしてください";
+      document.querySelectorAll(".item.picked").forEach(x => x.classList.remove("picked")); it.classList.add("picked"); history.replaceState(null, "", "#id=" + st.id); box.scrollIntoView({behavior:"smooth", block:"start"}); };
+    btns.appendChild(pick);
+    it.appendChild(btns); list.appendChild(it);
   });
+  const credits = $("#credits"), pol = $("#policies");
+  Object.keys(d.policies).forEach(name => { const li = document.createElement("li"); li.textContent = "VOICEVOX:" + name; credits.appendChild(li);
+    if (d.policies[name]) { const det = document.createElement("details"); const s = document.createElement("summary"); s.textContent = "利用規約（" + name + "）"; det.appendChild(s); const pre = document.createElement("pre"); pre.textContent = d.policies[name]; det.appendChild(pre); pol.appendChild(det); } });
   function filter(){
-    const q = $("#q").value.trim().toLowerCase(), talk = $("#talkOnly").checked; let n = 0;
-    document.querySelectorAll(".card").forEach(card => {
-      let vis = 0;
-      card.querySelectorAll("button.play").forEach(b => { const ok = (!q || b.dataset.text.includes(q) || card.dataset.name.toLowerCase().includes(q)) && (!talk || b.dataset.type === "talk"); b.classList.toggle("hide", !ok); if (ok) vis++; });
-      card.classList.toggle("hide", vis === 0); n += vis;
-    });
-    $("#count").textContent = n + " 件";
+    const q = $("#q").value.trim().toLowerCase(); let n = 0;
+    document.querySelectorAll(".item").forEach(it => { const tags = it.dataset.tags.split(" "); const ok = (!q || it.dataset.text.includes(q)) && [...selected].every(t => tags.includes(t)); it.classList.toggle("hide", !ok); if (ok) n++; });
+    count.textContent = n + " 件";
   }
-  // 歌うスタイルが 1 つも無ければ、その絞り込みは出さない(/speakers は話す声だけを返す)
-  if (!d.speakers.some(sp => sp.styles.some(st => (st.type || "talk") !== "talk"))) $("#talkOnly").closest("label").hidden = true;
-  $("#q").addEventListener("input", filter); $("#talkOnly").addEventListener("change", filter); filter();
+  $("#q").addEventListener("input", filter); filter();
+  $("#copyAgain").onclick = async () => { const ok = await copyText($("#resultText").value); $("#copyNote").textContent = ok ? "コピーしました" : "コピーできませんでした"; };
+  // #id=29 で開いたら、その声までスクロールして印を付ける
+  const m = /id=(\d+)/.exec(location.hash || ""); if (m) { const it = document.getElementById("id-" + m[1]); if (it) { it.classList.add("picked"); setTimeout(() => it.scrollIntoView({behavior:"smooth", block:"center"}), 150); } }
 });
 </script>
 </body>
