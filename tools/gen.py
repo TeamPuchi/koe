@@ -11,13 +11,15 @@ ROOT = Path(__file__).resolve().parents[1]
 ap = argparse.ArgumentParser()
 ap.add_argument("--engine", default="http://localhost:50021")
 ap.add_argument("--text", default="はじめまして。ぷちです。きょうも、いっしょに。")
-ap.add_argument("--variants", default="2,3,8,10,9,14,16,20,12,13", help="速さ・高さの変化版も作る speaker id(カンマ区切り)")
+ap.add_argument("--variants", default="2,3,8,10,9,14,16,20,12,46", help="速さ・高さの変化版も作る speaker id(カンマ区切り)")
 a = ap.parse_args()
 # 速さと高さは独立(10/11 ありさん)。3 × 3 の組み合わせで、ふつう×ふつうは元の音
 SPEEDS = {"slow": 0.9, "base": 1.0, "fast": 1.1}
 PITCHES = {"low": -0.05, "base": 0.0, "high": 0.05}
 VARIANTS = {f"{sk}_{pk}": {"speedScale": sv, "pitchScale": pv} for sk, sv in SPEEDS.items() for pk, pv in PITCHES.items() if not (sk == "base" and pk == "base")}
 variant_ids = {int(x) for x in a.variants.split(",") if x.strip()}
+# 選択肢に入れない id(tools/exclude.txt)。音も作らない・消す
+EXCLUDE = {int(l.split("#")[0]) for l in (ROOT / "tools" / "exclude.txt").read_text(encoding="utf-8").splitlines() if l.split("#")[0].strip().isdigit()}
 # 前の voices.json のタグ(人が直した分)を引き継ぐ
 old_tags = {}
 try:
@@ -51,6 +53,10 @@ for sp in speakers:
     out["policies"][sp["name"]] = info.get("policy", "")
     for st in sp["styles"]:
         sid = st["id"]; mp3 = ROOT / "audio" / f"{sid}.mp3"
+        if sid in EXCLUDE:
+            for f in (ROOT / "audio").glob(f"{sid}.mp3"): f.unlink()
+            for f in (ROOT / "audio").glob(f"{sid}_*.mp3"): f.unlink()
+            continue
         if not mp3.exists(): synth(sid, {}, mp3)
         item = {"id": sid, "style": st["name"], "speaker": sp["name"], "speaker_uuid": sp["speaker_uuid"], "type": st.get("type", "talk"),
                 "tags": old_tags.get(sid) or tags_for(sp["name"], st["name"]), "file": f"audio/{sid}.mp3"}
@@ -63,16 +69,20 @@ for sp in speakers:
         out["styles"].append(item)
     print(sp["name"], [s_["id"] for s_ in sp["styles"]])
 out["styles"].sort(key=lambda x: x["id"])
+used = {st["speaker"] for st in out["styles"]}
+out["policies"] = {k: v for k, v in out["policies"].items() if k in used}
+out["excluded"] = sorted(EXCLUDE)
 (ROOT / "voices.json").write_text(json.dumps(out, ensure_ascii=False, indent=1), encoding="utf-8")
 
-# ぷちたちが読む用
-lines = [f"# VOICEVOX の声の一覧(ぷちたち用)\n", f"作った日 {out['generated']} ・ VOICEVOX ENGINE {version} ・ 文「{a.text}」\n",
-         "声を決めるときは `speaker id` をクラウドの `voice_speaker` に入れる。音は https://teampuchi.github.io/koe/audio/<id>.mp3 (人向けのページは https://teampuchi.github.io/koe/ )。",
-         "雰囲気のタグは初期値(スタイル名と話者の説明から機械的に付けた)。直したいときは voices.json の `tags` を直す(tools/gen.py は人が直したタグを引き継ぐ)。\n",
-         "| speaker id | スタイル | 雰囲気 | 話者 | 音 | 速さ・高さの変化版 |", "|---|---|---|---|---|---|"]
+# ぷちたちが読む用。スタイル名・話者名は載せない(名前で印象が引っ張られないように。10/11 ありさん)。
+# 使うときのクレジット(VOICEVOX:話者名)は voices.json の speaker と policies から運営が付ける
+lines = [f"# 声の一覧(ぷちたち用)\n", f"作った日 {out['generated']} ・ 文「{a.text}」\n",
+         "声は番号(speaker id)で選ぶ。音は https://teampuchi.github.io/koe/audio/<番号>.mp3 。人向けのページは https://teampuchi.github.io/koe/#id=<番号> 。",
+         "雰囲気は初期値(機械的に付けた)。決めたら番号を運営に伝える(クラウドの voice_speaker)。名前の表記(クレジット)は運営がやる。\n",
+         "| 番号 | 雰囲気 | 音 | 速さ・高さを変えた音 |", "|---|---|---|---|"]
 for st in out["styles"]:
-    v = "あり(速さ 0.9/1.0/1.1 × 高さ -0.05/0/+0.05、audio/<id>_<速さ>_<高さ>.mp3)" if st.get("variants") else ""
-    lines.append(f"| {st['id']} | {st['style']} | {' '.join(st['tags'])} | {st['speaker']} | [mp3](audio/{st['id']}.mp3) | {v} |")
-lines += ["", "## クレジット(必須)", "", "作った声を使うときは、話者ごとに「VOICEVOX:<話者名>」と書く。各話者の利用規約は voices.json の policies と、ページの「利用規約」に。"]
+    v = "あり(速さ 0.9/1.0/1.1 × 高さ -0.05/0/+0.05、audio/<番号>_<速さ>_<高さ>.mp3)" if st.get("variants") else ""
+    lines.append(f"| {st['id']} | {' '.join(st['tags'])} | [mp3](audio/{st['id']}.mp3) | {v} |")
+lines += ["", f"選択肢に入れていない番号: {', '.join(str(x) for x in sorted(EXCLUDE))}(聞き取りにくい・用途に合わない)"]
 (ROOT / "VOICES.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
 print("styles", len(out["styles"]), "speakers", len(speakers), "variants", len(variant_ids))

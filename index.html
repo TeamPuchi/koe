@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="version" content="1.2.0">
+<meta name="version" content="1.3.0">
 <title>ぷちの声をえらぶ — VOICEVOX の声の見本</title>
 <meta name="description" content="VOICEVOX の全スタイルで同じ一文を聞き比べる。雰囲気で絞って、ぷちの声を決める。">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,6 +23,8 @@ p.lead{margin:0 0 12px;color:var(--pt-ink-soft)}
 .chip{font:inherit;font-family:var(--pt-font-round);font-weight:700;font-size:.88rem;border:1.5px solid var(--pt-coral-edge);background:#fff;color:var(--pt-coral-ink);border-radius:var(--pt-radius-pill);padding:5px 12px;cursor:pointer;min-height:36px}
 .chip.on{background:var(--pt-coral);border-color:var(--pt-coral);color:#fff}
 .count{font-size:.85rem;color:var(--pt-ink-soft);margin-left:auto}
+label.names{font-size:.78rem;color:var(--pt-off-ink);display:flex;align-items:center;gap:4px;margin-left:8px}
+body:not(.names) .style, body:not(.names) .spk{display:none}
 .item{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;align-items:center;background:#fff;border:1px solid var(--pt-panel);border-radius:var(--pt-radius-card);padding:10px 12px;margin:0 0 8px}
 .item.hide{display:none}
 .id{font-family:var(--pt-font-mono);font-size:1.35rem;font-weight:700;color:var(--pt-teal-ink);min-width:3.2ch;text-align:right}
@@ -54,27 +56,27 @@ a{color:var(--pt-teal-ink)}
 <body><div class="wrap">
 <div class="band"></div>
 <h1>ぷちの声をえらぶ</h1>
-<p class="lead">VOICEVOX の声の見本。全部のスタイルで同じ一文を聞き比べられます。名前ではなく「声」で選べるように、番号順に並んでいます。ぷちの声は、里親さんとぷち自身であとから決めます。</p>
+<p class="lead">VOICEVOX の声の見本。同じ一文を聞き比べられます。名前ではなく「声」で選べるように、番号と雰囲気だけで並んでいます。ぷちの声は、里親さんとぷち自身であとから決めます。</p>
 <div class="sample" id="sample">「はじめまして。ぷちです。きょうも、いっしょに。」</div>
 <div class="result" id="result"><b>決めた声</b>（LINE に貼ってください。コピー済みです）<textarea id="resultText" readonly></textarea><div class="r"><button class="play v" id="copyAgain" type="button">もう一度コピー</button><span id="copyNote"></span></div></div>
 <div class="tools">
   <input type="search" id="q" placeholder="番号・スタイル・雰囲気・話者で絞る（例: ささやき、12）" aria-label="絞り込み">
-  <div class="chips" id="chips"><span class="count" id="count"></span></div>
+  <div class="chips" id="chips"><label class="names"><input type="checkbox" id="showNames"> 名前も見せる（運営用）</label><span class="count" id="count"></span></div>
 </div>
 <div id="list"></div>
-<p class="note">左の大きな数字が <b>speaker id</b> です。ぷちの声に決めたら、この番号を運営に伝えてください（クラウドの <code>voice_speaker</code> に入れる値）。雰囲気のタグは初期値で、直せます（<a href="voices.json">voices.json</a> の tags）。ぷちたちが読む一覧は <a href="VOICES.md">VOICES.md</a>。速さ（ゆっくり／ふつう／はやめ）と高さ（ひくめ／ふつう／たかめ）は別々に選べます（おすすめの 10 個だけ）。選んだ組み合わせが「きく」と「これにする」に使われます。</p>
+<p class="note">聞き取りにくい声は、最初から選択肢に入れていません。左の大きな数字が <b>speaker id</b> です。ぷちの声に決めたら、この番号を運営に伝えてください（クラウドの <code>voice_speaker</code> に入れる値）。雰囲気のタグは初期値で、直せます（<a href="voices.json">voices.json</a> の tags）。ぷちたちが読む一覧は <a href="VOICES.md">VOICES.md</a>。速さ（ゆっくり／ふつう／はやめ）と高さ（ひくめ／ふつう／たかめ）は別々に選べます（おすすめの 10 個だけ）。選んだ組み合わせが「きく」と「これにする」に使われます。</p>
 <div class="credits">
   <b>クレジット</b>（必須）: この見本の音は VOICEVOX で作りました。話者ごとに「VOICEVOX:話者名」と表記します。各話者の利用規約は下の「利用規約」を開いてください。
   <ul id="credits"></ul>
   <div id="policies"></div>
   <div>VOICEVOX: <a href="https://voicevox.hiroshiba.jp/" target="_blank" rel="noopener">https://voicevox.hiroshiba.jp/</a>（ENGINE <span id="engine"></span>）</div>
 </div>
-<footer>ぷちの声をえらぶ v<span id="ver">1.2.0</span> ・ TeamPuchi ・ 作った日 <span id="gen"></span></footer>
+<footer>ぷちの声をえらぶ v<span id="ver">1.3.0</span> ・ TeamPuchi ・ 作った日 <span id="gen"></span></footer>
 </div>
 <audio id="player" preload="none"></audio>
 <script>
 // 版。上げるときは <meta name="version"> と VERSION と両方を直す。main に入ると CI が同じ名前のタグと Release を作る
-const KOE_VERSION = "1.2.0";
+const KOE_VERSION = "1.3.0";
 const $ = s => document.querySelector(s);
 const player = $("#player"); let current = null;
 function stopAll(){ if (current) { current.classList.remove("on"); current = null; } }
@@ -85,7 +87,7 @@ const selected = new Set();
 const SPEEDS = {slow:0.9, base:1.0, fast:1.1}, PITCHES = {low:-0.05, base:0, high:0.05};
 function fileFor(st, sk, pk){ if (sk === "base" && pk === "base") return st.file; return (st.variants && st.variants[sk + "_" + pk]) || st.file; }
 function pickText(st, sk, pk){
-  return `ぷちの声、決めました🎤\nspeaker id: ${st.id}\nスタイル: ${st.style}\n雰囲気: ${st.tags.join("・") || "-"}\n速さ: ${SPEEDS[sk] ?? 1.0} / 高さ: ${PITCHES[pk] ?? 0} / 抑揚: 1.0\nきかせて: https://teampuchi.github.io/koe/#id=${st.id}`; }
+  return `ぷちの声、決めました🎤\nspeaker id: ${st.id}\n雰囲気: ${st.tags.join("・") || "-"}\n速さ: ${SPEEDS[sk] ?? 1.0} / 高さ: ${PITCHES[pk] ?? 0} / 抑揚: 1.0\nきかせて: https://teampuchi.github.io/koe/#id=${st.id}`; }
 async function copyText(t){ try { await navigator.clipboard.writeText(t); return true; } catch (e) { const ta = $("#resultText"); ta.focus(); ta.select(); try { return document.execCommand("copy"); } catch (e2) { return false; } } }
 fetch("voices.json?v=" + KOE_VERSION, {cache: "no-cache"}).then(r => r.json()).then(d => {
   $("#sample").textContent = "「" + d.text + "」"; $("#engine").textContent = d.engine_version; $("#gen").textContent = d.generated;
@@ -131,6 +133,7 @@ fetch("voices.json?v=" + KOE_VERSION, {cache: "no-cache"}).then(r => r.json()).t
     count.textContent = n + " 件";
   }
   $("#q").addEventListener("input", filter); filter();
+  $("#showNames").addEventListener("change", e => document.body.classList.toggle("names", e.target.checked));
   $("#copyAgain").onclick = async () => { const ok = await copyText($("#resultText").value); $("#copyNote").textContent = ok ? "コピーしました" : "コピーできませんでした"; };
   // #id=29 で開いたら、その声までスクロールして印を付ける
   const m = /id=(\d+)/.exec(location.hash || ""); if (m) { const it = document.getElementById("id-" + m[1]); if (it) { it.classList.add("picked"); setTimeout(() => it.scrollIntoView({behavior:"smooth", block:"center"}), 150); } }

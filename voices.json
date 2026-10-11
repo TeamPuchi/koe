@@ -218,18 +218,6 @@
    }
   },
   {
-   "id": 11,
-   "style": "ノーマル",
-   "speaker": "玄野武宏",
-   "speaker_uuid": "c30dc15a-0992-4f8d-8bb8-ad3b314e6a6f",
-   "type": "talk",
-   "tags": [
-    "おとな",
-    "はきはき"
-   ],
-   "file": "audio/11.mp3"
-  },
-  {
    "id": 12,
    "style": "ふつう",
    "speaker": "白上虎太郎",
@@ -249,28 +237,6 @@
     "fast_low": "audio/12_fast_low.mp3",
     "fast_base": "audio/12_fast_base.mp3",
     "fast_high": "audio/12_fast_high.mp3"
-   }
-  },
-  {
-   "id": 13,
-   "style": "ノーマル",
-   "speaker": "青山龍星",
-   "speaker_uuid": "4f51116a-d9ee-4516-925d-21f183e2afad",
-   "type": "talk",
-   "tags": [
-    "おとな",
-    "ひくめ"
-   ],
-   "file": "audio/13.mp3",
-   "variants": {
-    "slow_low": "audio/13_slow_low.mp3",
-    "slow_base": "audio/13_slow_base.mp3",
-    "slow_high": "audio/13_slow_high.mp3",
-    "base_low": "audio/13_base_low.mp3",
-    "base_high": "audio/13_base_high.mp3",
-    "fast_low": "audio/13_fast_low.mp3",
-    "fast_base": "audio/13_fast_base.mp3",
-    "fast_high": "audio/13_fast_high.mp3"
    }
   },
   {
@@ -354,19 +320,6 @@
    "file": "audio/18.mp3"
   },
   {
-   "id": 19,
-   "style": "ささやき",
-   "speaker": "九州そら",
-   "speaker_uuid": "481fb609-6446-4870-9f46-90c4dd623403",
-   "type": "talk",
-   "tags": [
-    "ささやき",
-    "やさしい",
-    "おとな"
-   ],
-   "file": "audio/19.mp3"
-  },
-  {
    "id": 20,
    "style": "ノーマル",
    "speaker": "もち子さん",
@@ -387,31 +340,6 @@
     "fast_base": "audio/20_fast_base.mp3",
     "fast_high": "audio/20_fast_high.mp3"
    }
-  },
-  {
-   "id": 21,
-   "style": "ノーマル",
-   "speaker": "剣崎雌雄",
-   "speaker_uuid": "1a17ca16-7ee5-4ea5-b191-2f02ace24d21",
-   "type": "talk",
-   "tags": [
-    "おとな",
-    "ひくめ"
-   ],
-   "file": "audio/21.mp3"
-  },
-  {
-   "id": 22,
-   "style": "ささやき",
-   "speaker": "ずんだもん",
-   "speaker_uuid": "388f246b-8c41-4ac1-8e2d-5d79f3ff56d9",
-   "type": "talk",
-   "tags": [
-    "ささやき",
-    "こども",
-    "げんき"
-   ],
-   "file": "audio/22.mp3"
   },
   {
    "id": 23,
@@ -522,69 +450,6 @@
    "file": "audio/31.mp3"
   },
   {
-   "id": 32,
-   "style": "わーい",
-   "speaker": "白上虎太郎",
-   "speaker_uuid": "e5020595-5c5d-4e87-b849-270a518d0dcf",
-   "type": "talk",
-   "tags": [
-    "げんき",
-    "こども"
-   ],
-   "file": "audio/32.mp3"
-  },
-  {
-   "id": 33,
-   "style": "びくびく",
-   "speaker": "白上虎太郎",
-   "speaker_uuid": "e5020595-5c5d-4e87-b849-270a518d0dcf",
-   "type": "talk",
-   "tags": [
-    "よわき",
-    "こども",
-    "げんき"
-   ],
-   "file": "audio/33.mp3"
-  },
-  {
-   "id": 34,
-   "style": "おこ",
-   "speaker": "白上虎太郎",
-   "speaker_uuid": "e5020595-5c5d-4e87-b849-270a518d0dcf",
-   "type": "talk",
-   "tags": [
-    "つよめ",
-    "こども",
-    "げんき"
-   ],
-   "file": "audio/34.mp3"
-  },
-  {
-   "id": 35,
-   "style": "びえーん",
-   "speaker": "白上虎太郎",
-   "speaker_uuid": "e5020595-5c5d-4e87-b849-270a518d0dcf",
-   "type": "talk",
-   "tags": [
-    "なきそう",
-    "こども"
-   ],
-   "file": "audio/35.mp3"
-  },
-  {
-   "id": 36,
-   "style": "ささやき",
-   "speaker": "四国めたん",
-   "speaker_uuid": "7ffcb7ce-00ec-4bdc-82cd-45a8889e43ff",
-   "type": "talk",
-   "tags": [
-    "ささやき",
-    "おちついた",
-    "たかめ"
-   ],
-   "file": "audio/36.mp3"
-  },
-  {
    "id": 37,
    "style": "ヒソヒソ",
    "speaker": "四国めたん",
@@ -609,45 +474,6 @@
     "げんき"
    ],
    "file": "audio/38.mp3"
-  },
-  {
-   "id": 39,
-   "style": "喜び",
-   "speaker": "玄野武宏",
-   "speaker_uuid": "c30dc15a-0992-4f8d-8bb8-ad3b314e6a6f",
-   "type": "talk",
-   "tags": [
-    "げんき",
-    "おとな",
-    "はきはき"
-   ],
-   "file": "audio/39.mp3"
-  },
-  {
-   "id": 40,
-   "style": "ツンギレ",
-   "speaker": "玄野武宏",
-   "speaker_uuid": "c30dc15a-0992-4f8d-8bb8-ad3b314e6a6f",
-   "type": "talk",
-   "tags": [
-    "つよめ",
-    "おとな",
-    "はきはき"
-   ],
-   "file": "audio/40.mp3"
-  },
-  {
-   "id": 41,
-   "style": "悲しみ",
-   "speaker": "玄野武宏",
-   "speaker_uuid": "c30dc15a-0992-4f8d-8bb8-ad3b314e6a6f",
-   "type": "talk",
-   "tags": [
-    "なきそう",
-    "おとな",
-    "はきはき"
-   ],
-   "file": "audio/41.mp3"
   },
   {
    "id": 42,
@@ -707,7 +533,17 @@
     "やさしい",
     "おちついた"
    ],
-   "file": "audio/46.mp3"
+   "file": "audio/46.mp3",
+   "variants": {
+    "slow_low": "audio/46_slow_low.mp3",
+    "slow_base": "audio/46_slow_base.mp3",
+    "slow_high": "audio/46_slow_high.mp3",
+    "base_low": "audio/46_base_low.mp3",
+    "base_high": "audio/46_base_high.mp3",
+    "fast_low": "audio/46_fast_low.mp3",
+    "fast_base": "audio/46_fast_base.mp3",
+    "fast_high": "audio/46_fast_high.mp3"
+   }
   },
   {
    "id": 47,
@@ -733,67 +569,6 @@
     "おちついた"
    ],
    "file": "audio/48.mp3"
-  },
-  {
-   "id": 49,
-   "style": "恐怖",
-   "speaker": "ナースロボ＿タイプＴ",
-   "speaker_uuid": "882a636f-3bac-431a-966d-c5e6bba9f949",
-   "type": "talk",
-   "tags": [
-    "よわき",
-    "はきはき",
-    "おちついた"
-   ],
-   "file": "audio/49.mp3"
-  },
-  {
-   "id": 50,
-   "style": "内緒話",
-   "speaker": "ナースロボ＿タイプＴ",
-   "speaker_uuid": "882a636f-3bac-431a-966d-c5e6bba9f949",
-   "type": "talk",
-   "tags": [
-    "ささやき",
-    "おちついた"
-   ],
-   "file": "audio/50.mp3"
-  },
-  {
-   "id": 51,
-   "style": "ノーマル",
-   "speaker": "†聖騎士 紅桜†",
-   "speaker_uuid": "471e39d2-fb11-4c8c-8d89-4b322d2498e0",
-   "type": "talk",
-   "tags": [
-    "おとな",
-    "つよめ"
-   ],
-   "file": "audio/51.mp3"
-  },
-  {
-   "id": 52,
-   "style": "ノーマル",
-   "speaker": "雀松朱司",
-   "speaker_uuid": "0acebdee-a4a5-4e12-a695-e19609728e30",
-   "type": "talk",
-   "tags": [
-    "おとな",
-    "おちついた"
-   ],
-   "file": "audio/52.mp3"
-  },
-  {
-   "id": 53,
-   "style": "ノーマル",
-   "speaker": "麒ヶ島宗麟",
-   "speaker_uuid": "7d1e7ba7-f957-40e5-a3fc-da49f769ab65",
-   "type": "talk",
-   "tags": [
-    "おとな",
-    "ひくめ"
-   ],
-   "file": "audio/53.mp3"
   },
   {
    "id": 54,
@@ -957,18 +732,6 @@
    "file": "audio/66.mp3"
   },
   {
-   "id": 67,
-   "style": "ノーマル",
-   "speaker": "栗田まろん",
-   "speaker_uuid": "04dbd989-32d0-40b4-9e71-17c920f2a8a9",
-   "type": "talk",
-   "tags": [
-    "おちついた",
-    "やさしい"
-   ],
-   "file": "audio/67.mp3"
-  },
-  {
    "id": 68,
    "style": "ノーマル",
    "speaker": "あいえるたん",
@@ -1003,19 +766,6 @@
     "たかめ"
    ],
    "file": "audio/70.mp3"
-  },
-  {
-   "id": 71,
-   "style": "ささやき",
-   "speaker": "満別花丸",
-   "speaker_uuid": "287aa49f-e56b-4530-a469-855776c84a8d",
-   "type": "talk",
-   "tags": [
-    "ささやき",
-    "げんき",
-    "たかめ"
-   ],
-   "file": "audio/71.mp3"
   },
   {
    "id": 72,
@@ -1131,96 +881,6 @@
    "file": "audio/80.mp3"
   },
   {
-   "id": 81,
-   "style": "熱血",
-   "speaker": "青山龍星",
-   "speaker_uuid": "4f51116a-d9ee-4516-925d-21f183e2afad",
-   "type": "talk",
-   "tags": [
-    "げんき",
-    "おとな",
-    "ひくめ"
-   ],
-   "file": "audio/81.mp3"
-  },
-  {
-   "id": 82,
-   "style": "不機嫌",
-   "speaker": "青山龍星",
-   "speaker_uuid": "4f51116a-d9ee-4516-925d-21f183e2afad",
-   "type": "talk",
-   "tags": [
-    "つよめ",
-    "おとな",
-    "ひくめ"
-   ],
-   "file": "audio/82.mp3"
-  },
-  {
-   "id": 83,
-   "style": "喜び",
-   "speaker": "青山龍星",
-   "speaker_uuid": "4f51116a-d9ee-4516-925d-21f183e2afad",
-   "type": "talk",
-   "tags": [
-    "げんき",
-    "おとな",
-    "ひくめ"
-   ],
-   "file": "audio/83.mp3"
-  },
-  {
-   "id": 84,
-   "style": "しっとり",
-   "speaker": "青山龍星",
-   "speaker_uuid": "4f51116a-d9ee-4516-925d-21f183e2afad",
-   "type": "talk",
-   "tags": [
-    "おとな",
-    "ひくめ"
-   ],
-   "file": "audio/84.mp3"
-  },
-  {
-   "id": 85,
-   "style": "かなしみ",
-   "speaker": "青山龍星",
-   "speaker_uuid": "4f51116a-d9ee-4516-925d-21f183e2afad",
-   "type": "talk",
-   "tags": [
-    "なきそう",
-    "おとな",
-    "ひくめ"
-   ],
-   "file": "audio/85.mp3"
-  },
-  {
-   "id": 86,
-   "style": "囁き",
-   "speaker": "青山龍星",
-   "speaker_uuid": "4f51116a-d9ee-4516-925d-21f183e2afad",
-   "type": "talk",
-   "tags": [
-    "ささやき",
-    "おとな",
-    "ひくめ"
-   ],
-   "file": "audio/86.mp3"
-  },
-  {
-   "id": 87,
-   "style": "人間（怒り）ver.",
-   "speaker": "後鬼",
-   "speaker_uuid": "0f56c2f2-644c-49c9-8989-94e11f7129d0",
-   "type": "talk",
-   "tags": [
-    "つよめ",
-    "おとな",
-    "おちついた"
-   ],
-   "file": "audio/87.mp3"
-  },
-  {
    "id": 88,
    "style": "鬼ver.",
    "speaker": "後鬼",
@@ -1304,93 +964,6 @@
     "はきはき"
    ],
    "file": "audio/94.mp3"
-  },
-  {
-   "id": 95,
-   "style": "怒り",
-   "speaker": "中部つるぎ",
-   "speaker_uuid": "4614a7de-9829-465d-9791-97eb8a5f9b86",
-   "type": "talk",
-   "tags": [
-    "つよめ",
-    "おとな",
-    "はきはき"
-   ],
-   "file": "audio/95.mp3"
-  },
-  {
-   "id": 96,
-   "style": "ヒソヒソ",
-   "speaker": "中部つるぎ",
-   "speaker_uuid": "4614a7de-9829-465d-9791-97eb8a5f9b86",
-   "type": "talk",
-   "tags": [
-    "ささやき",
-    "おとな"
-   ],
-   "file": "audio/96.mp3"
-  },
-  {
-   "id": 97,
-   "style": "おどおど",
-   "speaker": "中部つるぎ",
-   "speaker_uuid": "4614a7de-9829-465d-9791-97eb8a5f9b86",
-   "type": "talk",
-   "tags": [
-    "よわき",
-    "おとな",
-    "はきはき"
-   ],
-   "file": "audio/97.mp3"
-  },
-  {
-   "id": 98,
-   "style": "絶望と敗北",
-   "speaker": "中部つるぎ",
-   "speaker_uuid": "4614a7de-9829-465d-9791-97eb8a5f9b86",
-   "type": "talk",
-   "tags": [
-    "なきそう",
-    "おとな",
-    "はきはき"
-   ],
-   "file": "audio/98.mp3"
-  },
-  {
-   "id": 99,
-   "style": "ノーマル",
-   "speaker": "離途",
-   "speaker_uuid": "3b91e034-e028-4acb-a08d-fbdcd207ea63",
-   "type": "talk",
-   "tags": [
-    "おちついた",
-    "ひくめ"
-   ],
-   "file": "audio/99.mp3"
-  },
-  {
-   "id": 100,
-   "style": "ノーマル",
-   "speaker": "黒沢冴白",
-   "speaker_uuid": "0b466290-f9b6-4718-8d37-6c0c81e824ac",
-   "type": "talk",
-   "tags": [
-    "ひくめ",
-    "おとな"
-   ],
-   "file": "audio/100.mp3"
-  },
-  {
-   "id": 101,
-   "style": "シリアス",
-   "speaker": "離途",
-   "speaker_uuid": "3b91e034-e028-4acb-a08d-fbdcd207ea63",
-   "type": "talk",
-   "tags": [
-    "おちついた",
-    "ひくめ"
-   ],
-   "file": "audio/101.mp3"
   },
   {
    "id": 102,
@@ -1575,19 +1148,6 @@
     "こども"
    ],
    "file": "audio/116.mp3"
-  },
-  {
-   "id": 117,
-   "style": "ささやき",
-   "speaker": "あんこもん",
-   "speaker_uuid": "3be49e15-34bb-48a0-9e2f-9b80c96e9905",
-   "type": "talk",
-   "tags": [
-    "ささやき",
-    "げんき",
-    "こども"
-   ],
-   "file": "audio/117.mp3"
   }
  ],
  "policies": {
@@ -1596,13 +1156,10 @@
   "春日部つむぎ": "春日部つむぎの音声ライブラリを用いて生成した音声は、\n「VOICEVOX:春日部つむぎ」とクレジットを記載すれば、商用・非商用で利用可能です。\n\n利用規約の詳細は以下をご確認ください。  \nhttps://tsumugi-official.studio.site/rule\n",
   "雨晴はう": "雨晴はうの音声ライブラリを用いて生成した音声は、\n「VOICEVOX:雨晴はう」とクレジットを記載すれば、商用・非商用で利用可能です。\n\n利用規約の詳細は以下をご確認ください。  \nhttps://amehau.com/?page_id=225\n",
   "波音リツ": "波音リツの音声ライブラリを用いて生成した音声は、\n「VOICEVOX:波音リツ」とクレジットを記載すれば、商用・非商用で利用可能です。\n\n利用規約の詳細は以下をご確認ください。  \nhttp://canon-voice.com/kiyaku.html\n",
-  "玄野武宏": "玄野武宏の音声ライブラリを用いて生成した音声は、\n「VOICEVOX:玄野武宏」とクレジットを記載すれば、商用・非商用で利用可能です。\n\n利用規約の詳細は以下をご確認ください。  \nhttps://www.virvoxproject.com/voicevoxの利用規約\n",
   "白上虎太郎": "白上虎太郎の音声ライブラリを用いて生成した音声は、\n「VOICEVOX:白上虎太郎」とクレジットを記載すれば、商用・非商用で利用可能です。\n\n利用規約の詳細は以下をご確認ください。  \nhttps://www.virvoxproject.com/voicevoxの利用規約\n",
-  "青山龍星": "個人が青山龍星の音声ライブラリを用いて生成した音声は、\n「VOICEVOX:青山龍星」とクレジットを記載すれば、商用・非商用で利用可能です。\nただし企業が携わる形で利用する場合は、「ななはぴ(https://v.seventhh.com/contact/)」に対し事前確認を取る必要があります。\n\n利用規約の詳細は以下をご確認ください。  \nhttps://www.virvoxproject.com/voicevoxの利用規約\n",
   "冥鳴ひまり": "冥鳴ひまりの音声ライブラリを用いて生成した音声は、\n「VOICEVOX:冥鳴ひまり」とクレジットを記載すれば、商用・非商用で利用可能です。\n\n利用規約の詳細は以下をご確認ください。  \nhttps://meimeihimari.wixsite.com/himari/terms-of-use\n",
   "九州そら": "九州そらの音声ライブラリを用いて生成した音声は、\n「VOICEVOX:九州そら」とクレジットを記載すれば、商用・非商用で利用可能です。\n\n利用規約の詳細は以下をご確認ください。  \nhttps://zunko.jp/con_ongen_kiyaku.html\n",
   "もち子さん": "個人がもち子さんの音声ライブラリを用いて生成した音声は、\n「VOICEVOX:もち子(cv 明日葉よもぎ)」とクレジットを記載すれば、\n音声作品・音声素材・ゲーム作品等を除いて商用・非商用で利用可能です。  \nただし企業が携わる形で利用する場合は、「[もちぞら模型店](https://vtubermochio.wixsite.com/mochizora/contact)」に対し事前確認を取る必要があります。\n\n利用規約の詳細は以下をご確認ください。  \nhttps://vtubermochio.wixsite.com/mochizora/利用規約\n",
-  "剣崎雌雄": "剣崎雌雄の音声ライブラリを用いて生成した音声は、\n「VOICEVOX:剣崎雌雄」とクレジットを記載すれば、商用・非商用で利用可能です。\n\n利用規約の詳細は以下をご確認ください。  \nhttps://frontier.creatia.cc/fanclubs/413/posts/4507\n",
   "WhiteCUL": "WhiteCULの音声ライブラリを用いて生成した音声は、\n「VOICEVOX:WhiteCUL」とそれぞれクレジットを記載すれば、商用・非商用で利用可能です。\n\n利用規約の詳細は以下をご確認ください。  \nhttps://www.whitecul.com/guideline\n",
   "後鬼": "個人が後鬼の音声ライブラリを用いて生成した音声は、\n「VOICEVOX:後鬼」とクレジットを記載すれば、商用・非商用で利用可能です。\nただし企業が携わる形で利用する場合は、「[【鬼っ子ハンターついなちゃん】プロジェクト](https://ついなちゃん.com/mail/)」に対し事前確認を取る必要があります。\n\n利用規約の詳細は以下をご確認ください。  \nhttps://ついなちゃん.com/voicevox_terms/\n",
   "No.7": "個人がNo.7の音声ライブラリを用いて生成した音声は、\n「VOICEVOX:No.7」とクレジットを記載すれば、非商用（同人利用や配信による収入はOK）で利用可能です。\nその他商用利用の場合は、「[No.7製作委員会](https://voiceseven.com/)」に対し事前確認を取る必要があります。\n\n利用規約の詳細は以下をご確認ください。  \nhttps://voiceseven.com/#j0200\n",
@@ -1610,26 +1167,57 @@
   "櫻歌ミコ": "櫻歌ミコの音声ライブラリを用いて生成した音声は、\n「VOICEVOX:櫻歌ミコ」とクレジットを記載すれば、商用・非商用で利用可能です。\n\n利用規約の詳細は以下をご確認ください。  \nhttps://voicevox35miko.studio.site/rule\n",
   "小夜/SAYO": "小夜/SAYOの音声ライブラリを用いて生成した音声は、\n「VOICEVOX:小夜/SAYO」とクレジットを記載すれば、商用・非商用で利用可能です。\n\n利用規約の詳細は以下をご確認ください。  \nhttps://316soramegu.wixsite.com/sayo-official/guideline\n",
   "ナースロボ＿タイプＴ": "ナースロボ＿タイプＴの音声ライブラリを用いて生成した音声は、\n「VOICEVOX:ナースロボ＿タイプＴ」とクレジットを記載すれば、商用・非商用で利用可能です。\n\n利用規約の詳細は以下をご確認ください。  \nhttps://www.krnr.top/rules\n",
-  "†聖騎士 紅桜†": "†聖騎士 紅桜†の音声ライブラリを用いて生成した音声は、\n「VOICEVOX:†聖騎士 紅桜†」とクレジットを記載すれば、商用・非商用で利用可能です。\n\n利用規約の詳細は以下をご確認ください。\nhttps://commons.nicovideo.jp/material/nc296132\n",
-  "雀松朱司": "雀松朱司の音声ライブラリを用いて生成した音声は、\n「VOICEVOX:雀松朱司」とクレジットを記載すれば、商用・非商用で利用可能です。\n\n利用規約の詳細は以下をご確認ください。\nhttps://www.virvoxproject.com/voicevoxの利用規約\n",
-  "麒ヶ島宗麟": "麒ヶ島宗麟の音声ライブラリを用いて生成した音声は、\n「VOICEVOX:麒ヶ島宗麟」とクレジットを記載すれば、商用・非商用で利用可能です。\n\n利用規約の詳細は以下をご確認ください。\nhttps://www.virvoxproject.com/voicevoxの利用規約\n",
   "春歌ナナ": "春歌ナナの音声ライブラリを用いて生成した音声は、\n「VOICEVOX:春歌ナナ」とクレジットを記載すれば、商用・非商用で利用可能です。\n\n利用規約の詳細は以下をご確認ください。  \nhttps://nanahira.jp/haruka_nana/guideline.html\n",
   "猫使アル": "猫使アルの音声ライブラリを用いて生成した音声は、\n「VOICEVOX:猫使アル」とクレジットを記載すれば、商用・非商用で利用可能です。\n\n利用規約の詳細は以下をご確認ください。  \nhttps://nekotukarb.wixsite.com/nekonohako/利用規約\n",
   "猫使ビィ": "猫使ビィの音声ライブラリを用いて生成した音声は、\n「VOICEVOX:猫使ビィ」とクレジットを記載すれば、商用・非商用で利用可能です。\n\n利用規約の詳細は以下をご確認ください。  \nhttps://nekotukarb.wixsite.com/nekonohako/利用規約\n",
   "中国うさぎ": "中国うさぎの音声ライブラリを用いて生成した音声は、\n「VOICEVOX:中国うさぎ」とクレジットを記載すれば、商用・非商用で利用可能です。\n\n利用規約の詳細は以下をご確認ください。  \nhttps://zunko.jp/con_ongen_kiyaku.html\n",
-  "栗田まろん": "栗田まろんの音声ライブラリを用いて生成した音声は、\n「VOICEVOX:栗田まろん」とクレジットを記載すれば、商用・非商用で利用可能です。\n\n利用規約の詳細は以下をご確認ください。  \nhttps://aivoice.jp/character/maron/\n",
   "あいえるたん": "あいえるたんの音声ライブラリを用いて生成した音声は、\n「VOICEVOX:あいえるたん」とクレジットを記載すれば、商用・非商用で利用可能です。\n\n利用規約の詳細は以下をご確認ください。  \nhttps://www.infiniteloop.co.jp/special/iltan/terms/\n",
   "満別花丸": "満別花丸の音声ライブラリを用いて生成した音声は、\n「VOICEVOX:満別花丸」とクレジットを記載すれば、商用・非商用で利用可能です。\n\n利用規約の詳細は以下をご確認ください。  \nhttps://100hanamaru.wixsite.com/manbetsu-hanamaru/rule\n",
   "琴詠ニア": "琴詠ニアの音声ライブラリを用いて生成した音声は、\n「VOICEVOX:琴詠ニア」とクレジットを記載すれば、商用・非商用で利用可能です。\n\n利用規約の詳細は以下をご確認ください。  \nhttps://commons.nicovideo.jp/works/nc315435\n",
   "Voidoll": "個人がVoidollの音声ライブラリを用いて生成した音声は、\n「VOICEVOX:Voidoll(CV:丹下桜)」とクレジットを記載すれば、商用・非商用で利用可能です。\nただし法人による利用の場合は、個別に問い合わせ(https://qa.nicovideo.jp/)が必要です。\n\n利用規約の詳細は以下をご確認ください。  \nhttps://blog.nicovideo.jp/niconews/224589.html\n",
   "ぞん子": "ぞん子の音声ライブラリを用いて生成した音声は、\n「VOICEVOX:ぞん子」とクレジットを記載すれば、商用・非商用で利用可能です。\nただし商用利用の場合は、個別に問い合わせ(https://zonko.zone-energy.jp/contact)が必要です。\n\n利用規約の詳細は以下をご確認ください。  \nhttps://zonko.zone-energy.jp/guideline\n",
   "中部つるぎ": "中部つるぎの音声ライブラリを用いて生成した音声は、\n「VOICEVOX:中部つるぎ」とクレジットを記載すれば、商用・非商用で利用可能です。\n\n利用規約の詳細は以下をご確認ください。  \nhttps://zunko.jp/con_ongen_kiyaku.html\n",
-  "離途": "離途の音声ライブラリを用いて生成した音声は、\n「VOICEVOX:離途」とクレジットを記載すれば、商用・非商用で利用可能です。\n\n利用規約の詳細は以下をご確認ください。  \nhttps://litmus9.com/#/voicebank#rules\n",
-  "黒沢冴白": "黒沢冴白の音声ライブラリを用いて生成した音声は、\n「VOICEVOX:黒沢冴白」とクレジットを記載すれば、商用・非商用で利用可能です。\n\n利用規約の詳細は以下をご確認ください。  \nhttps://www.virvoxproject.com/voicevoxの利用規約\n",
   "ユーレイちゃん": "個人がユーレイちゃんの音声ライブラリを用いて生成した音声は、\n「VOICEVOX:ユーレイちゃん(CV:神崎零)」とクレジットを記載すれば、非商用（同人利用や配信による収入は OK）で利用可能です。\nその他商用利用の場合は、「[ユーステラ](https://u-stella.co.jp/)」に対し事前確認を取る必要があります。\n\n利用規約の詳細は以下をご確認ください。  \nhttps://u-stella.co.jp/voicevox-ure-chan-tucumo-terms-of-use/\n",
   "東北ずん子": "東北ずん子の音声ライブラリを用いて生成した音声は、\n「VOICEVOX:東北ずん子」とクレジットを記載すれば、商用・非商用で利用可能です。\n\n利用規約の詳細は以下をご確認ください。  \nhttps://zunko.jp/con_ongen_kiyaku.html\n",
   "東北きりたん": "東北きりたんの音声ライブラリを用いて生成した音声は、\n「VOICEVOX:東北きりたん」とクレジットを記載すれば、商用・非商用で利用可能です。\n\n利用規約の詳細は以下をご確認ください。  \nhttps://zunko.jp/con_ongen_kiyaku.html\n",
   "東北イタコ": "東北イタコの音声ライブラリを用いて生成した音声は、\n「VOICEVOX:東北イタコ」とクレジットを記載すれば、商用・非商用で利用可能です。\n\n利用規約の詳細は以下をご確認ください。  \nhttps://zunko.jp/con_ongen_kiyaku.html\n",
   "あんこもん": "あんこもんの音声ライブラリを用いて生成した音声は、\n「VOICEVOX:あんこもん」とクレジットを記載すれば、商用・非商用で利用可能です。\n\n利用規約の詳細は以下をご確認ください。  \nhttps://zunko.jp/con_ongen_kiyaku.html\n"
- }
+ },
+ "excluded": [
+  11,
+  13,
+  19,
+  21,
+  22,
+  32,
+  33,
+  34,
+  35,
+  36,
+  39,
+  40,
+  41,
+  49,
+  50,
+  51,
+  52,
+  53,
+  67,
+  71,
+  81,
+  82,
+  83,
+  84,
+  85,
+  86,
+  87,
+  95,
+  96,
+  97,
+  98,
+  99,
+  100,
+  101,
+  117
+ ]
 }
