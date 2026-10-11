@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="version" content="1.4.0">
+<meta name="version" content="1.4.1">
 <title>ぷちの声をえらぶ — VOICEVOX の声の見本</title>
 <meta name="description" content="VOICEVOX の全スタイルで同じ一文を聞き比べる。雰囲気で絞って、ぷちの声を決める。">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -84,12 +84,12 @@ a{color:var(--pt-teal-ink)}
   <div id="policies"></div>
   <div>VOICEVOX: <a href="https://voicevox.hiroshiba.jp/" target="_blank" rel="noopener">https://voicevox.hiroshiba.jp/</a>（ENGINE <span id="engine"></span>）</div>
 </div>
-<footer>ぷちの声をえらぶ v<span id="ver">1.4.0</span> ・ TeamPuchi ・ 作った日 <span id="gen"></span></footer>
+<footer>ぷちの声をえらぶ v<span id="ver">1.4.1</span> ・ TeamPuchi ・ 作った日 <span id="gen"></span></footer>
 </div>
 <audio id="player" preload="none"></audio>
 <script>
 // 版。上げるときは <meta name="version"> と VERSION と両方を直す。main に入ると CI が同じ名前のタグと Release を作る
-const KOE_VERSION = "1.4.0";
+const KOE_VERSION = "1.4.1";
 const $ = s => document.querySelector(s);
 // ---- きせかえの顔(TeamPuchi/kisekae の render と同じ形) ----
 const NS = "http://www.w3.org/2000/svg";
@@ -121,8 +121,10 @@ function renderFace(t){ const svg = $("#faceSvg"); if (!svg) return; while (svg.
   svg.appendChild(mouthNodes(m, c, ox, oy, open)); }
 function faceLoop(t){ if (face.on) renderFace(t); requestAnimationFrame(faceLoop); }
 function setFaceFromText(text){ // きせかえの文(LINE 用)か URL から # の中を読む
-  const m = /#([^\s]*)/.exec(text || ""); if (!m) return false; const q = new URLSearchParams(m[1]);
-  const c = q.get("c"); if (!c || !/^[0-9a-f]{6}$/i.test(c)) return false;
+  // 文の中の「#…」のうち、c=(色)が入っているものを使う(「いろ: さんご #f5b1aa」の # は飛ばす)
+  let q = null, hit = null;
+  for (const mm of (text || "").matchAll(/#([^\s]+)/g)) { const qq = new URLSearchParams(mm[1]); const cc = qq.get("c"); if (cc && /^[0-9a-f]{6}$/i.test(cc)) { q = qq; hit = mm[0]; break; } }
+  if (!q) return false; const c = q.get("c"); const m = [hit];
   face.color = "#" + c.toLowerCase(); const b = q.get("b"); face.bg = (b && /^[0-9a-f]{6}$/i.test(b)) ? "#" + b.toLowerCase() : "#ffffff";
   face.eye = EYES.some(x => x.key === q.get("e")) ? q.get("e") : "now"; face.mouth = MOUTHS.some(x => x.key === q.get("m")) ? q.get("m") : "heart";
   face.glasses = ["round", "square"].includes(q.get("g")) ? q.get("g") : "none"; face.name = (q.get("n") || "").slice(0, 12);
