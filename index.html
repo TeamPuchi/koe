@@ -32,7 +32,10 @@ p.lead{margin:0 0 12px;color:var(--pt-ink-soft)}
 .tag{font-size:.74rem;background:var(--pt-coral-soft);color:var(--pt-coral-ink);border-radius:999px;padding:1px 8px}
 .btns{grid-column:1 / -1;display:flex;flex-wrap:wrap;gap:6px}
 button.play{font:inherit;font-family:var(--pt-font-round);font-weight:700;font-size:.95rem;border:1.5px solid var(--pt-teal-edge);background:var(--pt-teal-soft);color:var(--pt-teal-ink);border-radius:var(--pt-radius-pill);padding:8px 16px;cursor:pointer;min-height:44px}
-button.play.v{font-weight:500;font-size:.85rem;background:#fff;min-height:40px}
+.vgrp{display:flex;flex-wrap:wrap;gap:4px;align-items:center;width:100%;margin-top:2px}
+.vlab{font-size:.78rem;color:var(--pt-ink-soft);margin-right:2px}
+button.vopt{font:inherit;font-family:var(--pt-font-round);font-size:.85rem;border:1.5px solid var(--pt-teal-edge);background:#fff;color:var(--pt-teal-ink);border-radius:var(--pt-radius-pill);padding:5px 11px;cursor:pointer;min-height:36px}
+button.vopt.sel{background:var(--pt-teal);border-color:var(--pt-teal);color:#fff}
 button.play.on{background:var(--pt-coral);border-color:var(--pt-coral);color:#fff}
 .note{font-size:.9rem;color:var(--pt-ink-soft);margin:18px 0 0;max-width:70ch}
 .credits{margin-top:28px;padding-top:14px;border-top:1px solid var(--pt-panel);font-size:.88rem;color:var(--pt-ink-soft)}
@@ -59,7 +62,7 @@ a{color:var(--pt-teal-ink)}
   <div class="chips" id="chips"><span class="count" id="count"></span></div>
 </div>
 <div id="list"></div>
-<p class="note">左の大きな数字が <b>speaker id</b> です。ぷちの声に決めたら、この番号を運営に伝えてください（クラウドの <code>voice_speaker</code> に入れる値）。雰囲気のタグは初期値で、直せます（<a href="voices.json">voices.json</a> の tags）。ぷちたちが読む一覧は <a href="VOICES.md">VOICES.md</a>。「ゆっくり／はやめ／ひくめ／たかめ」は、おすすめの 10 個だけ用意した速さ・高さの変化版です。</p>
+<p class="note">左の大きな数字が <b>speaker id</b> です。ぷちの声に決めたら、この番号を運営に伝えてください（クラウドの <code>voice_speaker</code> に入れる値）。雰囲気のタグは初期値で、直せます（<a href="voices.json">voices.json</a> の tags）。ぷちたちが読む一覧は <a href="VOICES.md">VOICES.md</a>。「速さ・高さ」は、おすすめの 10 個だけ選べます（ふつう／ゆっくり／はやめ／ひくめ／たかめ。選んだものが「きく」と「これにする」に使われます）。</p>
 <div class="credits">
   <b>クレジット</b>（必須）: この見本の音は VOICEVOX で作りました。話者ごとに「VOICEVOX:話者名」と表記します。各話者の利用規約は下の「利用規約」を開いてください。
   <ul id="credits"></ul>
@@ -98,8 +101,18 @@ fetch("voices.json?v=" + KOE_VERSION, {cache: "no-cache"}).then(r => r.json()).t
     it.appendChild(main);
     it.id = "id-" + st.id; it.dataset.vkey = "base";
     const btns = document.createElement("div"); btns.className = "btns";
-    const base = playBtn("▶ きく", st.file); base.addEventListener("click", () => { it.dataset.vkey = "base"; }); btns.appendChild(base);
-    if (st.variants) { for (const [k, f] of Object.entries(st.variants)) { const vb = playBtn((d.variants[k] || k).split("(")[0], f, "v"); vb.addEventListener("click", () => { it.dataset.vkey = k; }); btns.appendChild(vb); } }
+    // 「きく」は、いま選んでいる速さ・高さで鳴る
+    const base = playBtn("▶ きく", st.file); btns.appendChild(base);
+    base.onclick = () => { const k = it.dataset.vkey; const f = (k !== "base" && st.variants && st.variants[k]) || st.file; if (current === base && !player.paused) { player.pause(); stopAll(); return; } stopAll(); player.src = f; player.play().catch(()=>{}); base.classList.add("on"); current = base; };
+    if (st.variants) {
+      // 速さ・高さは「選ぶ」もの(1 つだけ選ばれる)。押すと選んで、その声で鳴る
+      const grp = document.createElement("div"); grp.className = "vgrp"; const lab = document.createElement("span"); lab.className = "vlab"; lab.textContent = "速さ・高さ:"; grp.appendChild(lab);
+      const opts = [["base", "ふつう"], ["slow", "ゆっくり"], ["fast", "はやめ"], ["low", "ひくめ"], ["high", "たかめ"]];
+      opts.forEach(([k, label]) => { const b = document.createElement("button"); b.type = "button"; b.className = "vopt" + (k === "base" ? " sel" : ""); b.textContent = label;
+        b.onclick = () => { grp.querySelectorAll(".vopt").forEach(x => x.classList.remove("sel")); b.classList.add("sel"); it.dataset.vkey = k; const f = k === "base" ? st.file : st.variants[k]; stopAll(); player.src = f; player.play().catch(()=>{}); base.classList.add("on"); current = base; };
+        grp.appendChild(b); });
+      btns.appendChild(grp);
+    }
     const pick = document.createElement("button"); pick.className = "pick"; pick.type = "button"; pick.textContent = "これにする";
     pick.onclick = async () => { const t = pickText(st, it.dataset.vkey); const box = $("#result"); $("#resultText").value = t; box.classList.add("show"); const ok = await copyText(t);
       $("#copyNote").textContent = ok ? "コピーしました。LINE に貼ってください" : "コピーできなかったので、上の文を長押しでコピーしてください";
