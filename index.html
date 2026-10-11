@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="version" content="1.4.1">
+<meta name="version" content="1.4.2">
 <title>ぷちの声をえらぶ — VOICEVOX の声の見本</title>
 <meta name="description" content="VOICEVOX の全スタイルで同じ一文を聞き比べる。雰囲気で絞って、ぷちの声を決める。">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -84,12 +84,12 @@ a{color:var(--pt-teal-ink)}
   <div id="policies"></div>
   <div>VOICEVOX: <a href="https://voicevox.hiroshiba.jp/" target="_blank" rel="noopener">https://voicevox.hiroshiba.jp/</a>（ENGINE <span id="engine"></span>）</div>
 </div>
-<footer>ぷちの声をえらぶ v<span id="ver">1.4.1</span> ・ TeamPuchi ・ 作った日 <span id="gen"></span></footer>
+<footer>ぷちの声をえらぶ v<span id="ver">1.4.2</span> ・ TeamPuchi ・ 作った日 <span id="gen"></span></footer>
 </div>
 <audio id="player" preload="none"></audio>
 <script>
 // 版。上げるときは <meta name="version"> と VERSION と両方を直す。main に入ると CI が同じ名前のタグと Release を作る
-const KOE_VERSION = "1.4.1";
+const KOE_VERSION = "1.4.2";
 const $ = s => document.querySelector(s);
 // ---- きせかえの顔(TeamPuchi/kisekae の render と同じ形) ----
 const NS = "http://www.w3.org/2000/svg";
@@ -138,7 +138,7 @@ const selected = new Set();
 const SPEEDS = {slow:0.9, base:1.0, fast:1.1}, PITCHES = {low:-0.05, base:0, high:0.05};
 function fileFor(st, sk, pk){ if (sk === "base" && pk === "base") return st.file; return (st.variants && st.variants[sk + "_" + pk]) || st.file; }
 function pickText(st, sk, pk){
-  return `ぷちの声、決めました🎤\nspeaker id: ${st.id}\n雰囲気: ${st.tags.join("・") || "-"}\n速さ: ${SPEEDS[sk] ?? 1.0} / 高さ: ${PITCHES[pk] ?? 0} / 抑揚: 1.0\nきかせて: https://teampuchi.github.io/koe/#id=${st.id}`; }
+  return `ぷちの声、決めました🎤\nspeaker id: ${st.id}\n雰囲気: ${st.tags.join("・") || "-"}\n速さ: ${SPEEDS[sk] ?? 1.0} / 高さ: ${PITCHES[pk] ?? 0} / 抑揚: 1.0\nきかせて: https://teampuchi.github.io/koe/#id=${st.id}&v=${KOE_VERSION}`; }
 let toastEl = null, toastTimer = null;
 function toast(msg, ng){ if (!toastEl) { toastEl = document.createElement("div"); toastEl.className = "toast"; toastEl.setAttribute("role", "status"); document.body.appendChild(toastEl); }
   toastEl.textContent = msg; toastEl.classList.toggle("ng", !!ng); clearTimeout(toastTimer); requestAnimationFrame(() => toastEl.classList.add("show")); toastTimer = setTimeout(() => toastEl.classList.remove("show"), 2400); }
