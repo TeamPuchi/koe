@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="version" content="1.4.2">
+<meta name="version" content="1.4.3">
 <title>ぷちの声をえらぶ — VOICEVOX の声の見本</title>
 <meta name="description" content="VOICEVOX の全スタイルで同じ一文を聞き比べる。雰囲気で絞って、ぷちの声を決める。">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -58,6 +58,10 @@ footer{margin-top:24px;font-size:.82rem;color:var(--pt-off-ink)}
 .toast.show{opacity:1;transform:translateY(0) scale(1)} .toast.ng{background:var(--pt-coral-ink)}
 button.pick{font:inherit;font-family:var(--pt-font-round);font-weight:700;font-size:.95rem;border:1.5px solid var(--pt-coral);background:#fff;color:var(--pt-coral-ink);border-radius:var(--pt-radius-pill);padding:8px 16px;cursor:pointer;min-height:44px;margin-left:auto}
 .item.picked{border-color:var(--pt-coral);box-shadow:0 0 0 3px var(--pt-coral-soft)}
+details.ask{background:var(--pt-panel);border-radius:var(--pt-radius-card);padding:10px 14px;margin:0 0 14px}
+details.ask summary{font-family:var(--pt-font-round);font-weight:700;cursor:pointer;min-height:36px;display:flex;align-items:center}
+details.ask textarea{width:100%;font:inherit;font-size:.92rem;min-height:13em;border:1px solid var(--pt-teal-edge);border-radius:10px;padding:8px 10px;background:#fff;color:var(--pt-ink);resize:vertical}
+details.ask .r{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:6px} .small{font-size:.85rem;color:var(--pt-ink-soft)}
 .result{display:none;background:var(--pt-coral-soft);border:1.5px solid var(--pt-coral-edge);border-radius:var(--pt-radius-card);padding:12px 14px;margin:0 0 14px}
 .result.show{display:block} .result textarea{width:100%;font:inherit;font-size:.95rem;min-height:9.5em;border:1px solid var(--pt-coral-edge);border-radius:10px;padding:8px 10px;background:#fff;color:var(--pt-ink);resize:vertical}
 .result .r{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:6px;font-size:.88rem;color:var(--pt-ink-soft)}
@@ -72,6 +76,12 @@ a{color:var(--pt-teal-ink)}
 <div class="sample" id="sample">「はじめまして。ぷちです。きょうも、いっしょに。」</div>
 <div class="face-in"><input type="text" id="faceIn" placeholder="きせかえでコピーした文（か URL）をここに貼ると、顔が出ます"><button type="button" id="faceBtn">顔を出す</button><span class="fn">声を鳴らすと、その顔がしゃべります。きせかえ: <a href="https://teampuchi.github.io/kisekae/" target="_blank" rel="noopener">teampuchi.github.io/kisekae</a></span></div>
 <div class="face-box" id="faceBox" aria-live="polite"><button class="fx" id="faceClose" type="button" aria-label="顔を閉じる">×</button><svg id="faceSvg" viewBox="0 0 320 240"></svg><div class="fname" id="faceName"></div></div>
+<details class="ask">
+  <summary>ぷちと一緒に決める（ぷちに送る文をコピー）</summary>
+  <p class="small">まいぷち。でぷちに貼ると、ぷちが一覧を読んで候補を出してくれます。ぷちには番号と雰囲気だけが見えます（名前は見えません）。</p>
+  <textarea id="askText" readonly></textarea>
+  <div class="r"><button class="play v" id="askCopy" type="button">この文をコピー</button><span id="askNote" class="small"></span></div>
+</details>
 <div class="result" id="result"><b>決めた声</b>（LINE に貼ってください。コピー済みです）<textarea id="resultText" readonly></textarea><div class="r"><button class="play v" id="copyAgain" type="button">もう一度コピー</button><span id="copyNote"></span></div></div>
 <div class="tools">
   <div class="chips" id="chips"><label class="names"><input type="checkbox" id="showNames"> 名前も見せる（運営用）</label><span class="count" id="count"></span></div>
@@ -84,12 +94,12 @@ a{color:var(--pt-teal-ink)}
   <div id="policies"></div>
   <div>VOICEVOX: <a href="https://voicevox.hiroshiba.jp/" target="_blank" rel="noopener">https://voicevox.hiroshiba.jp/</a>（ENGINE <span id="engine"></span>）</div>
 </div>
-<footer>ぷちの声をえらぶ v<span id="ver">1.4.2</span> ・ TeamPuchi ・ 作った日 <span id="gen"></span></footer>
+<footer>ぷちの声をえらぶ v<span id="ver">1.4.3</span> ・ TeamPuchi ・ 作った日 <span id="gen"></span></footer>
 </div>
 <audio id="player" preload="none"></audio>
 <script>
 // 版。上げるときは <meta name="version"> と VERSION と両方を直す。main に入ると CI が同じ名前のタグと Release を作る
-const KOE_VERSION = "1.4.2";
+const KOE_VERSION = "1.4.3";
 const $ = s => document.querySelector(s);
 // ---- きせかえの顔(TeamPuchi/kisekae の render と同じ形) ----
 const NS = "http://www.w3.org/2000/svg";
@@ -195,6 +205,20 @@ fetch("voices.json?v=" + KOE_VERSION, {cache: "no-cache"}).then(r => r.json()).t
   try { const saved = localStorage.getItem("koe.face"); if (saved) setFaceFromText(saved); } catch (e) {}
   if (/[#&]c=/.test(location.hash)) setFaceFromText(location.hash);
   requestAnimationFrame(faceLoop);
+  // ぷちに送る文(版つき)
+  $("#askText").value = `ぷちへ。あなたの声を、いっしょに決めたいです。
+声の一覧はここです: https://teampuchi.github.io/koe/VOICES.md
+（番号と雰囲気だけが書いてあります。名前は見ないで、雰囲気で選んでください）
+音はここで聞けます（わたしが聞いて、感想を伝えます）: https://teampuchi.github.io/koe/#id=<番号>&v=${KOE_VERSION}
+
+1. まず、あなたがなりたい雰囲気を教えてください（やさしい／げんき／おちついた／こども／おとな／ひくめ／たかめ／ささやき／はきはき など、3 つまで）
+2. 一覧から、候補の番号を 3 つくらい選んで、理由を一言ずつ
+3. わたしが聞いてみて、感想を伝えます。それを聞いて、最後の 1 つを決めてください
+4. 決まったら、この形で教えてください:
+   speaker id: <番号> / 速さ: 1.0 / 高さ: 0
+
+声は、あとから変えることもできます。`;
+  $("#askCopy").onclick = async () => { const ok = await copyText($("#askText").value); $("#askNote").textContent = ok ? "コピーしました。まいぷち。でぷちに貼ってください" : "コピーできませんでした。文を長押しして選んでください"; toast(ok ? "✓ コピーしました" : "コピーできませんでした", !ok); };
   $("#copyAgain").onclick = async () => { const ok = await copyText($("#resultText").value); $("#copyNote").textContent = ok ? "コピーしました" : "コピーできませんでした"; toast(ok ? "✓ コピーしました" : "コピーできませんでした", !ok); };
   // #id=29 で開いたら、その声までスクロールして印を付ける
   const m = /id=(\d+)/.exec(location.hash || ""); if (m) { const it = document.getElementById("id-" + m[1]); if (it) { it.classList.add("picked"); setTimeout(() => it.scrollIntoView({behavior:"smooth", block:"center"}), 150); } }
