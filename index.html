@@ -92,6 +92,8 @@ fetch("voices.json").then(r => r.json()).then(d => {
     });
     $("#count").textContent = n + " 件";
   }
+  // 歌うスタイルが 1 つも無ければ、その絞り込みは出さない(/speakers は話す声だけを返す)
+  if (!d.speakers.some(sp => sp.styles.some(st => (st.type || "talk") !== "talk"))) $("#talkOnly").closest("label").hidden = true;
   $("#q").addEventListener("input", filter); $("#talkOnly").addEventListener("change", filter); filter();
 });
 </script>
