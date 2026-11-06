@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="version" content="1.4.3">
+<meta name="version" content="1.4.4">
 <title>ぷちの声をえらぶ — VOICEVOX の声の見本</title>
 <meta name="description" content="VOICEVOX の全スタイルで同じ一文を聞き比べる。雰囲気で絞って、ぷちの声を決める。">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -99,7 +99,7 @@ a{color:var(--pt-teal-ink)}
 <audio id="player" preload="none"></audio>
 <script>
 // 版。上げるときは <meta name="version"> と VERSION と両方を直す。main に入ると CI が同じ名前のタグと Release を作る
-const KOE_VERSION = "1.4.3";
+const KOE_VERSION = "1.4.4";
 const $ = s => document.querySelector(s);
 // ---- きせかえの顔(TeamPuchi/kisekae の render と同じ形) ----
 const NS = "http://www.w3.org/2000/svg";
@@ -214,10 +214,10 @@ fetch("voices.json?v=" + KOE_VERSION, {cache: "no-cache"}).then(r => r.json()).t
 1. まず、あなたがなりたい雰囲気を教えてください（やさしい／げんき／おちついた／こども／おとな／ひくめ／たかめ／ささやき／はきはき など、3 つまで）
 2. 一覧から、候補の番号を 3 つくらい選んで、理由を一言ずつ
 3. わたしが聞いてみて、感想を伝えます。それを聞いて、最後の 1 つを決めてください
-4. 決まったら、この形で教えてください:
-   speaker id: <番号> / 速さ: 1.0 / 高さ: 0
+4. 決まったら、voice_choose の道具で、自分の声にしてください（番号・速さ 1.0・高さ 0。速さと高さを変えたいときはその値で）。
+   そのあと、決めた番号をわたしにも教えてください
 
-声は、あとから変えることもできます。`;
+声は、最初のこの1回だけ自分で決められます。あとから変えたくなったら、運営さんに相談できます。`;
   $("#askCopy").onclick = async () => { const ok = await copyText($("#askText").value); $("#askNote").textContent = ok ? "コピーしました。まいぷち。でぷちに貼ってください" : "コピーできませんでした。文を長押しして選んでください"; toast(ok ? "✓ コピーしました" : "コピーできませんでした", !ok); };
   $("#copyAgain").onclick = async () => { const ok = await copyText($("#resultText").value); $("#copyNote").textContent = ok ? "コピーしました" : "コピーできませんでした"; toast(ok ? "✓ コピーしました" : "コピーできませんでした", !ok); };
   // #id=29 で開いたら、その声までスクロールして印を付ける
